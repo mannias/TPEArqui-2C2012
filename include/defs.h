@@ -21,10 +21,10 @@
 #define ACS_INT         ( ACS_PRESENT | ACS_INT_386 )
 
 #define ENTER			00
-#define TAB				00
-#define BACKSPACE		00
-#define BACK_ARROW		00
-#define FORW_ARROW		00
+#define TAB				01
+#define BACKSPACE		02
+#define BACK_ARROW		03
+#define FORW_ARROW		04
 
 #define ACS_CODE        (ACS_PRESENT | ACS_CSEG | ACS_READ)
 #define ACS_DATA        (ACS_PRESENT | ACS_DSEG | ACS_WRITE)
