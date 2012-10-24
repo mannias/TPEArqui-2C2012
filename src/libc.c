@@ -46,12 +46,12 @@ write (char c) {
 
 int
 tick_is_at_line_start () {
-	return (tickpos% /* tamaño de linea */) == 0
+	return (tickpos% 10/* tamaño de linea */) == 0
 }
 
 int
 tick_is_at_line_end () {
-	return ( (tickpos +1) % /* tamaño de linea */) == 0
+	return ( (tickpos +1) % 10/* tamaño de linea */) == 0
 }
 
 char 
