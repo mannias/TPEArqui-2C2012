@@ -4,22 +4,18 @@
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
 
-char * pantalla = (char *) 0xb8000;
-int ubi = 0;
-
 void int_08() {
 
-	pantalla[ubi+=2] = 'A';
+	write(15);
 
 }
 
 
 char keyboard_flags[4];
-char keyboard_buffer;
 
 void int_09() {
 
-	pantalla[ubi+=2] = 'Z';
+	write(21);
 	
 	
 }

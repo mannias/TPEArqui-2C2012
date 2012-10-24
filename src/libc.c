@@ -1,11 +1,10 @@
 #include "../include/kc.h"
 
 char tickpos=0;
-
+char keyboard_buffer;
 
 void
 write (char c) {
-/*
 	char * pantalla = (char *) 0xb8000;
 	
 	switch(c) {
@@ -40,8 +39,7 @@ write (char c) {
 		case default:
 			pantalla[tickpos] = c;
 			tickpos+=2;
-	}
-*/	
+	}	
 }
 
 int
@@ -58,14 +56,14 @@ char
 read () {
 	
 	char aux;
-	/*while(!keyboard_buffer)
+	while(!keyboard_buffer)
 		;
 
 	aux = keyboard_buffer;	
 
 	keyboard_buffer = 0;
 	return aux;
-*/
+
 }
 
 
