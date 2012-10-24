@@ -4,10 +4,12 @@
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
 
+char * pantalla = (char *) 0xb8000;
+int ubi = 0;
 
 void int_08() {
 
-	write('+');
+	pantalla[ubi+=2] = 'A';
 
 }
 
@@ -17,9 +19,7 @@ char keyboard_buffer;
 
 void int_09() {
 
-	char aux= /* aca llamo a la rutina q levanta de i/o 060h y retorna el valor */;
-	
-	/* chequeo la matriz etc etc y pongo el valor final en el keyboard_buffer */
+	pantalla[ubi+=2] = 'Z';
 	
 	
 }
@@ -43,6 +43,7 @@ kmain()
 /* CARGA DE IDT CON LA RUTINA DE ATENCION DE IRQ0    */
 
         setup_IDT_entry (&idt[0x08], 0x08, (dword)&_int_08_hand, ACS_INT, 0);
+        setup_IDT_entry (&idt[0x09], 0x08, (dword)&_int_08_hand, ACS_INT, 0);
 	
 /* Carga de IDTR    */
 
@@ -55,7 +56,7 @@ kmain()
 	_Cli();
 /* Habilito interrupcion de timer tick*/
 
-        _mascaraPIC1(0xFE);
+        _mascaraPIC1(0xFC);
         _mascaraPIC2(0xFF);
         
 	_Sti();

@@ -5,7 +5,7 @@ char tickpos=0;
 
 void
 write (char c) {
-
+/*
 	char * pantalla = (char *) 0xb8000;
 	
 	switch(c) {
@@ -41,29 +41,31 @@ write (char c) {
 			pantalla[tickpos] = c;
 			tickpos+=2;
 	}
-	
+*/	
 }
 
 int
 tick_is_at_line_start () {
-	return (tickpos% 10/* tamaño de linea */) == 0
+	return (tickpos% 10/* tamaño de linea */) == 0;
 }
 
 int
 tick_is_at_line_end () {
-	return ( (tickpos +1) % 10/* tamaño de linea */) == 0
+	return ( (tickpos +1) % 10/* tamaño de linea */) == 0;
 }
 
 char 
 read () {
 	
 	char aux;
-	while(!keyboard_buffer)
+	/*while(!keyboard_buffer)
 		;
 
 	aux = keyboard_buffer;	
+
 	keyboard_buffer = 0;
 	return aux;
+*/
 }
 
 
