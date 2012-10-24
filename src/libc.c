@@ -2,11 +2,70 @@
 
 char tickpos=0;
 
-void write (char c) {
+
+void
+write (char c) {
 
 	char * pantalla = (char *) 0xb8000;
-	pantalla[tickpos]
+	
+	switch(c) {
+	
+		case ENTER: 
+			
+		
+			break;
+	
+		case TAB: 
+			
+		
+			break;
+		
+		case BACKSPACE: 
+			if( !tick_is_at_line_start()) {
+				tickpos-=2;
+				write(' ');
+			}
+			break;
+		
+		case BACK_ARROW: 
+			if( !tick_is_at_line_start())
+				tickpos-=2;
+			break;
+
+		case FORW_ARROW: 
+			if( !tick_is_at_line_end())
+				tickpos+=2;
+			break;
+			
+		case default:
+			pantalla[tickpos] = c;
+			tickpos+=2;
+	}
+	
 }
+
+int
+tick_is_at_line_start () {
+	return (tickpos% /* tamaño de linea */) == 0
+}
+
+int
+tick_is_at_line_end () {
+	return ( (tickpos +1) % /* tamaño de linea */) == 0
+}
+
+char 
+read () {
+	
+	char aux;
+	while(!keyboard_buffer)
+		;
+
+	aux = keyboard_buffer;	
+	keyboard_buffer = 0;
+	return aux;
+}
+
 
 /***************************************************************
 *k_clear_screen

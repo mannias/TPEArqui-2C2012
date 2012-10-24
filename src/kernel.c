@@ -4,12 +4,10 @@
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
 
-int tickpos=200;
 
 void int_08() {
 
-    char *video = (char *) 0xb8000;
-    video[tickpos+=2]='+';
+	write('+');
 
 }
 
