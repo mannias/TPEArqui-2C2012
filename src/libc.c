@@ -36,7 +36,7 @@ write (char c) {
 				tickpos+=2;
 			break;
 			
-		case default:
+		default:
 			pantalla[tickpos] = c;
 			tickpos+=2;
 	}	

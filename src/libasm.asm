@@ -57,19 +57,25 @@ _int_08_hand:				; Handler de INT 8 ( Timer tick)
         push    ds
         push    es                      ; Se salvan los registros
         pusha                           ; Carga de DS y ES con el valor del selector
-        mov     ax, 10h			; a utilizar.
+        mov     ax, 10h                 ; a utilizar.
         mov     ds, ax
         mov     es, ax                  
         call    int_08                 
-        mov	al,20h			; Envio de EOI generico al PIC
-	out	20h,al
-	popa                            
+        mov     al,20h                  ; Envio de EOI generico al PIC
+        out     20h,al
+        popa                            
         pop     es
         pop     ds
         iret
 
-_int_09_hand:
-        call    int_09
+_int_09_hand: 
+        push    ds
+        push    es                      ; Se salvan los registros
+        pusha        
+        call int_09
+        popa                            
+        pop     es
+        pop     ds           ; Se llama a la funcion en C
         iret
 
 ; Debug para el BOCHS, detiene la ejecució; Para continuar colocar en el BOCHSDBG: set $eax=0

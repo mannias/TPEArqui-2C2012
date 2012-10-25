@@ -20,11 +20,11 @@
 #define ACS_INT_386 	0x0E		/* Interrupt GATE 32 bits */
 #define ACS_INT         ( ACS_PRESENT | ACS_INT_386 )
 
-#define ENTER			    0
-#define TAB				    0
-#define BACKSPACE		  0
-#define BACK_ARROW		0
-#define FORW_ARROW		0
+#define ENTER			00
+#define TAB				01
+#define BACKSPACE		02
+#define BACK_ARROW		03
+#define FORW_ARROW		04
 
 #define ACS_CODE        (ACS_PRESENT | ACS_CSEG | ACS_READ)
 #define ACS_DATA        (ACS_PRESENT | ACS_DSEG | ACS_WRITE)
