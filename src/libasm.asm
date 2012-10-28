@@ -68,14 +68,22 @@ _int_08_hand:				; Handler de INT 8 ( Timer tick)
         pop     ds
         iret
 
-_int_09_hand: 
-        push    ds
-        push    es                      ; Se salvan los registros
-        pusha        
+_int_09_hand:  
+        cli             
+        pusha
+        in al,60h
+        push eax
         call int_09
-        popa                            
-        pop     es
-        pop     ds           ; Se llama a la funcion en C
+        pop eax
+        jmp EOI
+
+
+EOI:
+
+        mov     al,20h
+        out     20h,al
+        popa
+        sti
         iret
 
 ; Debug para el BOCHS, detiene la ejecució; Para continuar colocar en el BOCHSDBG: set $eax=0
