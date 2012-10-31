@@ -1,7 +1,7 @@
 #include "../include/kc.h"
+#include "../include/keyboard.h"
 
 char tickpos=0;
-char keyboard_buffer;
 
 void
 write (char c) {
@@ -60,7 +60,7 @@ read () {
 		;
 
 	aux = keyboard_buffer;	
-
+	write(aux);
 	keyboard_buffer = 0;
 	return aux;
 

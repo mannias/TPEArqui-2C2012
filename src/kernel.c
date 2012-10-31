@@ -1,5 +1,6 @@
 #include "../include/kasm.h"
 #include "../include/defs.h"
+#include "../include/keyboard.h"
 
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
@@ -10,10 +11,7 @@ void int_08() {
 
 char keyboard_flags[4];
 
-void int_09(unsigned char scancode){
-	write(scancode);
-	return;
-}
+
 
 	
 /**********************************************
@@ -54,7 +52,12 @@ kmain()
 
         while(1)
         {
+        	read();
         }
 	
 }
 
+void int_09(unsigned char scancode){
+	printCharacter(scancode);
+	return;
+}
