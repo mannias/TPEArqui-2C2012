@@ -5,7 +5,7 @@
 
 #define BUFFER_LEN 200   /* tamaño del stack de teclado */
 
-void saveCharacter(char num);
+void saveCharacter(unsigned char num);
 void startKeyboard();
 char getC();
 
