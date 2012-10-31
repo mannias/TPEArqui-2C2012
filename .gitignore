@@ -1,5 +1,9 @@
-img/*
-bin/*
+~
+./img/*
+./bin/*
+img
+bin
 arma
 ./bochsrc.txt
-./grubtest.img
+grubtest.img
+.DS_Store
