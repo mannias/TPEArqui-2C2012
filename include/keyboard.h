@@ -2,7 +2,11 @@
 
 #ifndef _keyboard_
 #define _keyboard_
-char keyboard_buffer;
-void printCharacter(char num);
+
+#define BUFFER_LEN 200   /* tamaño del stack de teclado */
+
+void saveCharacter(char num);
+void startKeyboard();
+char getC();
 
 #endif

@@ -58,6 +58,6 @@ kmain()
 }
 
 void int_09(unsigned char scancode){
-	printCharacter(scancode);
+	saveCharacter(scancode);
 	return;
 }

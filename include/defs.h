@@ -30,6 +30,8 @@
 #define ACS_DATA        (ACS_PRESENT | ACS_DSEG | ACS_WRITE)
 #define ACS_STACK       (ACS_PRESENT | ACS_DSEG | ACS_WRITE)
 
+#define NULL  0
+
 #pragma pack (1) 		/* Alinear las siguiente estructuras a 1 byte */
 
 /* Descriptor de segmento */

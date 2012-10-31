@@ -56,12 +56,9 @@ char
 read () {
 	
 	char aux;
-	while(!keyboard_buffer)
+	while((aux = getC()) == NULL)
 		;
-
-	aux = keyboard_buffer;	
 	write(aux);
-	keyboard_buffer = 0;
 	return aux;
 
 }
