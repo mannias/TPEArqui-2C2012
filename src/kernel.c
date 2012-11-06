@@ -43,6 +43,7 @@ kmain()
 	_lidt (&idtr);	
 
 	_Cli();
+	
 /* Habilito interrupcion de timer tick*/
 
         _mascaraPIC1(0xFC);
