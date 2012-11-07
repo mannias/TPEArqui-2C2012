@@ -42,6 +42,13 @@ write (char c) {
 	}	
 }
 
+void printstring(char* string){
+	int i;
+	for(i=0; string[i] != '\0'; i++){
+		write(string[i]);
+	}
+}
+
 int
 tick_is_at_line_start () {
 	return (tickpos% 10/* tamaño de linea */) == 0;
@@ -101,4 +108,14 @@ void setup_IDT_entry (DESCR_INT *item, byte selector, dword offset, byte access,
   item->offset_h = offset >> 16;
   item->access = access;
   item->cero = cero;
+}
+
+char* getCommand(char* command){
+	int i;
+	char aux;
+	for(i=0; (aux = read()) != '\n'; i++){
+		write(aux);
+		command[i] = aux;
+	}
+	return command;
 }
