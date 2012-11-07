@@ -39,3 +39,10 @@ void printf(char* data, ...){
         	}
         va_end(ap);
 }
+
+void printstring(char* string){
+    int i;
+    for(i=0; string[i] != '\0'; i++){
+        write(string[i]);
+    }
+}

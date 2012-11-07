@@ -1,64 +1,6 @@
 #include "../include/kc.h"
 #include "../include/keyboard.h"
 
-char tickpos=0;
-
-void
-write (char c) {
-	char * pantalla = (char *) 0xb8000;
-	
-	switch(c) {
-	
-		case ENTER: 
-			
-		
-			break;
-	
-		case TAB: 
-			
-		
-			break;
-		
-		case BACKSPACE: 
-			if( !tick_is_at_line_start()) {
-				tickpos-=2;
-				write(' ');
-			}
-			break;
-		
-		case BACK_ARROW: 
-			if( !tick_is_at_line_start())
-				tickpos-=2;
-			break;
-
-		case FORW_ARROW: 
-			if( !tick_is_at_line_end())
-				tickpos+=2;
-			break;
-			
-		default:
-			pantalla[tickpos] = c;
-			tickpos+=2;
-	}	
-}
-
-void printstring(char* string){
-	int i;
-	for(i=0; string[i] != '\0'; i++){
-		write(string[i]);
-	}
-}
-
-int
-tick_is_at_line_start () {
-	return (tickpos% 10/* tamaño de linea */) == 0;
-}
-
-int
-tick_is_at_line_end () {
-	return ( (tickpos +1) % 10/* tamaño de linea */) == 0;
-}
-
 char 
 read () {
 	

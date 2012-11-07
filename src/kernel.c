@@ -7,6 +7,12 @@ IDTR idtr;				/* IDTR */
 
 void int_08() {
 }
+
+
+char keyboard_flags[4];
+
+
+
 	
 /**********************************************
 kmain() 
@@ -37,12 +43,19 @@ kmain()
 	_lidt (&idtr);	
 
 	_Cli();
+	
 /* Habilito interrupcion de timer tick*/
 
         _mascaraPIC1(0xFC);
         _mascaraPIC2(0xFF);
         
 	_Sti();
+
+        while(1)
+        {
+        	read();
+        }
+	
 }
 
 void int_09(unsigned char scancode){
