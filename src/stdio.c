@@ -3,6 +3,8 @@
 void printstring(char* string);
 void printint(int data);
 void printchar(char data);
+void write2(char data);
+int getIntLength(int num);
 
 void printf(const char *data, ...){
         va_list args;
@@ -12,9 +14,9 @@ void printf(const char *data, ...){
         int escaped = 0;
         char c, *p, *s;
 
+        int paso = 0;
         va_start(args, data);
-        while (*data != '\0')
-        	actual = *data++;
+        while ((actual = *data++) != '\0'){
         	if(actual == '%' && escaped == 0){
         		comming = 1;
         	}else if(escaped == 1){
@@ -40,6 +42,7 @@ void printf(const char *data, ...){
         	}else{
         		write(actual);
         	}
+        }
         va_end(args);
 }
 
@@ -51,9 +54,39 @@ void printstring(char* string){
 }
 
 void printint(int data){
-    write(data);
+    int num = getIntLength(data);
+
+    
 }
 
 void printchar(char data){
     write(data);
 }
+
+
+char *video= (char *) 0xb8000;
+int pos = 0;
+
+void write2(char data){
+    video[pos] = data;
+    pos+=2;
+    if(pos >= (80*25*2)){
+        pos = 0;
+    }
+}
+
+int getIntLength(int num){
+    if(num <0){
+        num *=(-1);
+    }
+    int sum = 1;
+    while(num > 9){
+        num /= 10;
+        sum++;
+    }
+    return sum;
+}
+
+
+
+

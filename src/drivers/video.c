@@ -13,7 +13,7 @@ setUpVideo(){
 	vcursor.character= FIRST_CHAR;
 	rcursor.line= FIRST_LINE;
 	rcursor.character= FIRST_CHAR;
-	*realVideo= (char *) 0xb8000;
+	realVideo= (char *) 0xb8000;
 	
 	for(i=0; i<LINE_SIZE ;i++)
 		for(j=0; j<LINES_QTY ;j++)

@@ -53,7 +53,6 @@ kmain()
 
         while(1)
         {
-        	//read();
         	startShell();
         }
 	

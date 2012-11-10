@@ -1,10 +1,9 @@
 #include "../include/shell.h"
-//#include "../include/stdio.h"
+#include "../include/stdio.h"
 
 
 void startShell(){
-	//write('a');
-	//refreshScreen();	
+	printf("lalaaa%d", 200);
 }
 
 
