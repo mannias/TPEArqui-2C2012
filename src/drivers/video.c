@@ -26,6 +26,8 @@ write (char c) {
 	virtualwrite(c);
 	realwrite();
 
+}
+
 void 
 realwrite() {
 	int i;
