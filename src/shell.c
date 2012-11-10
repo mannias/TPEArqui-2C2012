@@ -1,8 +1,10 @@
-#include "../include/stdio.h"
+#include "../include/shell.h"
+//#include "../include/stdio.h"
 
-startShell(){
-	char* command = getCommand();
-	
+
+void startShell(){
+	//write('a');
+	//refreshScreen();	
 }
 
 

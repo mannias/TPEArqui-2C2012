@@ -1,4 +1,4 @@
-#include "../include/keyboard.h"
+#include "keyboard.h"
 
 char* english 		= "__1234567890-=__qwertyuiop[]__asdfghjkl;'`_\\zxcvbnm,./_*_______________789-456+1230._____";
 char* englishShift 	= "__!@#$%^&*()_+__QWERTYUIOP{}__ASDFGHJKL:_~_|ZXCVBNM<>?_*_______________789-456+1230._____";

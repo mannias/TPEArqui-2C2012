@@ -1,18 +1,13 @@
 #include "../include/kasm.h"
 #include "../include/defs.h"
-#include "../include/keyboard.h"
+#include "drivers/keyboard.h"
+//#include "drivers/video.h"
 
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
 
 void int_08() {
 }
-
-
-char keyboard_flags[4];
-
-
-
 	
 /**********************************************
 kmain() 
@@ -22,12 +17,17 @@ Punto de entrada de código C.
 kmain() 
 {
 
-        int i,num;
+    int i,num;
 
 /* Borra la pantalla. */ 
 
 	k_clear_screen();
 
+/* Carga el teclado */
+	startKeyboard();
+
+/* Inicia el video */
+	setUpVideo();
 
 /* CARGA DE IDT CON LA RUTINA DE ATENCION DE IRQ0    */
 
@@ -53,7 +53,8 @@ kmain()
 
         while(1)
         {
-        	read();
+        	//read();
+        	startShell();
         }
 	
 }
@@ -62,3 +63,5 @@ void int_09(unsigned char scancode){
 	saveCharacter(scancode);
 	return;
 }
+
+
