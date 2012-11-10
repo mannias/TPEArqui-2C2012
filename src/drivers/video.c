@@ -3,22 +3,45 @@
 
 char virtualVideo[LINES_QTY][LINE_SIZE];
 tCursor vcursor;
-char *realVideo= (char *) 0xb8000;
+char *realVideo;
 tCursor rcursor;
 
 void
 setUpVideo(){
+	int i, j;
 	vcursor.line= FIRST_LINE;
 	vcursor.character= FIRST_CHAR;
 	rcursor.line= FIRST_LINE;
 	rcursor.character= FIRST_CHAR;
+	*realVideo= (char *) 0xb8000;
+	
+	for(i=0; i<LINE_SIZE ;i++)
+		for(j=0; j<LINES_QTY ;j++)
+			virtualVideo[j][i]= ' ';
 }
 
 void
 write (char c) {
+
+	virtualwrite(c);
+	realwrite();
+
+void 
+realwrite() {
 	int i;
-	realVideo[20] = 'c';
-	switch(c) {
+	
+	for(i= ((rcursor.line *LINE_SIZE) +rcursor.character); i< ((vcursor.line *LINE_SIZE) +vcursor.character) ;i+=2)
+		realVideo[i]= virtualVideo[i/16][i%16];
+			
+
+}
+
+
+void
+virtualwrite (char c) {
+	int i;
+	
+/*	switch(c) {
 	
 		case ENTER: 
 			vcursor.line++;
@@ -26,7 +49,7 @@ write (char c) {
 			break;
 	
 		case TAB: 
-			for(i=0; i<4 && (vcursor.character != (LINE_SIZE -1)) ;i++)
+			for(i=0; i<4 && (vcursor.character != (LINE_SIZE -2)) ;i++)
 				virtualVideo[vcursor.line][vcursor.character+=2]= ' ';
 			break;
 		
@@ -43,26 +66,26 @@ write (char c) {
 			break;
 
 		case FORW_ARROW: 
-			if(vcursor.character != (LINE_SIZE -1))
+			if(vcursor.character != (LINE_SIZE -2))
 				vcursor.character+= 2;
 			break;
 			
 		default:
-			if(vcursor.character != (LINE_SIZE -1)) {
-				virtualVideo[vcursor.line][vcursor.character]= c;
+			if(vcursor.character != (LINE_SIZE -2)) {
+*/				virtualVideo[vcursor.line][vcursor.character]= c;
+				
 				vcursor.character+= 2;
-			}
+/*			}
 	}	
-}
+*/}
 
 void
 refreshScreen() {
 	int i, j;
-	for(i=FIRST_CHAR; i<LINE_SIZE ;i++){
-		for(j=FIRST_LINE; j<LINES_QTY ;j++){
+	for(i=FIRST_CHAR; i<LINE_SIZE ;i++)
+		for(j=FIRST_LINE; j<LINES_QTY ;j++)
 			realVideo[(j*LINE_SIZE)+i]= virtualVideo[j][i];
-		}
-	}
+		
 }
 
 char 
@@ -71,8 +94,8 @@ read () {
 	char aux;
 	while((aux = getC()) == NULL)
 		;
-	write(aux);
-	refreshScreen();
+
+		
 	return aux;
 
 }

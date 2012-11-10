@@ -15,6 +15,8 @@ typedef struct {
 } tCursor;
 
 void write(char c);
+void virtualwrite(char c);
+void realwrite();
 char read();
 void refreshScreen();
 void setUpVideo();
