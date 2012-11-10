@@ -43,7 +43,7 @@ void
 virtualwrite (char c) {
 	int i;
 	
-	switch(c) {
+/*	switch(c) {
 	
 		case ENTER: 
 			vcursor.line++;
@@ -73,12 +73,12 @@ virtualwrite (char c) {
 			break;
 			
 		default:
-			if(vcursor.character != (LINE_SIZE -2)) {
+*/			if(vcursor.character != (LINE_SIZE -2)) {
 				virtualVideo[vcursor.line][vcursor.character]= c;
 				
 				vcursor.character+= 2;
 			}
-	}	
+/*	}	*/
 }
 
 void
