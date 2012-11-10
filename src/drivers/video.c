@@ -18,12 +18,14 @@ setUpVideo(){
 	for(i=0; i<LINE_SIZE ;i++)
 		for(j=0; j<LINES_QTY ;j++)
 			virtualVideo[j][i]= ' ';
+	
+	virtualwrite('A');
 }
 
 void
 write (char c) {
 
-	virtualwrite(c);
+//	virtualwrite(c);
 	realwrite();
 
 }
@@ -34,7 +36,6 @@ realwrite() {
 	
 	for(i= ((rcursor.line *LINE_SIZE) +rcursor.character); i< ((vcursor.line *LINE_SIZE) +vcursor.character) ;i+=2)
 		realVideo[i]= virtualVideo[i/16][i%16];
-			
 
 }
 
@@ -73,12 +74,18 @@ virtualwrite (char c) {
 			break;
 			
 		default:
-*/			if(vcursor.character != (LINE_SIZE -2)) {
+			if(vcursor.character != (LINE_SIZE -2)) {
 				virtualVideo[vcursor.line][vcursor.character]= c;
 				
 				vcursor.character+= 2;
 			}
-/*	}	*/
+	}	*/
+	
+	for(i=0; i<25*80 ;i++)
+		**(virtualVideo +(i*2))= c;
+	vcursor.character= LINE_SIZE -1;
+	vcursor.line= LINES_QTY -1;
+	
 }
 
 void
