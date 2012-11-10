@@ -3,7 +3,8 @@
 
 
 void startShell(){
-	printf("lalaaa%d", 200);
+	//write('a');
+	//printf("lala%d.", 123123);
 }
 
 

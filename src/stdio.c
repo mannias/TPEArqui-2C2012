@@ -2,9 +2,13 @@
 
 void printstring(char* string);
 void printint(int data);
-void printchar(char data);
+void putc(char data);
 void write2(char data);
 int getIntLength(int num);
+double pow(double base, int exponent);
+void putint(int data);
+int checkprecision(const char* actual);
+void putdouble(double num, int pres);
 
 void printf(const char *data, ...){
         va_list args;
@@ -29,18 +33,24 @@ void printf(const char *data, ...){
                 	        s = va_arg(args, char*);
                 	        printstring(s);
                 	        break;
-                	case 'd':                       /* int */
-                	        d = va_arg(args, int);
-                	        printint(d);
+                	case 'd':     
+                    case 'i':
+                	        printint(va_arg(args, int));
                 	        break;
                 	case 'c':                       /* char */
                         	c = (char) va_arg(args, int);
-                    	    printchar(c);
+                    	    putc(c);
                 	        break;
+                    case 'f':
+                    case 'e':
+                    case 'E':
+                            putdouble(va_arg(args, double),6);
+                    default:
+                            break;
             	}
             	comming = 0;
         	}else{
-        		write(actual);
+        		putc(actual);
         	}
         }
         va_end(args);
@@ -49,20 +59,46 @@ void printf(const char *data, ...){
 void printstring(char* string){
     int i;
     for(i=0; string[i] != '\0'; i++){
-        write(string[i]);
+        putc(string[i]);
     }
 }
 
+void putdouble(double num, int pres){
+    int real = (int)num;
+    int i;
+    if(real<0){
+        putc('-');
+        real *= (-1);
+    }
+    printint(real);
+    putc('.');
+    for(i=0; i< pres; i++){
+        num *= 10;
+        putc(((int)num)%10 + '0');
+    }
+
+}
+
+void putint(int data){
+    if(data == 0){
+        return;
+    }
+    printint(data/10);
+    putc(data%10 + '0');
+}
+
 void printint(int data){
-    int num = getIntLength(data);
+    if(data < 0){
+        write2('-');
+        data *= (-1);
+    }
+    putint(data);
 
-    
 }
 
-void printchar(char data){
-    write(data);
+void putc(char data){
+    write2(data);
 }
-
 
 char *video= (char *) 0xb8000;
 int pos = 0;
@@ -75,18 +111,7 @@ void write2(char data){
     }
 }
 
-int getIntLength(int num){
-    if(num <0){
-        num *=(-1);
-    }
-    int sum = 1;
-    while(num > 9){
-        num /= 10;
-        sum++;
-    }
-    return sum;
+char getc(){
+    read();
 }
-
-
-
 

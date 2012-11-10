@@ -20,6 +20,7 @@ setUpVideo(){
 			virtualVideo[j][i]= ' ';
 	
 	virtualwrite('A');
+	refreshScreen();
 }
 
 void
@@ -80,9 +81,12 @@ virtualwrite (char c) {
 				vcursor.character+= 2;
 			}
 	}	*/
-	
-	for(i=0; i<25*80 ;i++)
-		**(virtualVideo +(i*2))= c;
+	int w;
+	for(i=0; i<25 ;i++){
+		for(w=0; w<160; w++){
+			virtualVideo[i][w]= c;
+		}
+	}
 	vcursor.character= LINE_SIZE -1;
 	vcursor.line= LINES_QTY -1;
 	
@@ -91,19 +95,10 @@ virtualwrite (char c) {
 void
 refreshScreen() {
 	int i;
-	for(i=FIRST_CHAR; i<(LINE_SIZE*LINES_QTY) ;i++)
-			realVideo[i]= virtualVideo[i/LINE_SIZE][i%LINE_SIZE];
+	for(i=FIRST_CHAR; i<(LINE_SIZE*LINES_QTY) ;i++){
+		realVideo[i]= virtualVideo[(int)(i/LINE_SIZE)][i%LINE_SIZE];
+	}
 		
 }
 
-char 
-read () {
-	
-	char aux;
-	while((aux = getC()) == NULL)
-		;
 
-		
-	return aux;
-
-}

@@ -8,6 +8,6 @@
 
 void saveCharacter(unsigned char num);
 void startKeyboard();
-char getC();
+char getKeyboardChar();
 
 #endif

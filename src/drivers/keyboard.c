@@ -61,7 +61,7 @@ startKeyboard(){
 	}
 }
 
-char getC(){
+char getKeyboardChar(){
 	if(loc == -1){
 		if(keyboard_buffer[BUFFER_LEN-1] == NULL){
 			return NULL;
