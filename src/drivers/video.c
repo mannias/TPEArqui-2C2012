@@ -35,7 +35,7 @@ realwrite() {
 	int i;
 	
 	for(i= ((rcursor.line *LINE_SIZE) +rcursor.character); i< ((vcursor.line *LINE_SIZE) +vcursor.character) ;i+=2)
-		realVideo[i]= virtualVideo[i/16][i%16];
+		realVideo[i]= virtualVideo[i/LINE_SIZE][i%LINE_SIZE];
 
 }
 
@@ -90,10 +90,9 @@ virtualwrite (char c) {
 
 void
 refreshScreen() {
-	int i, j;
-	for(i=FIRST_CHAR; i<LINE_SIZE ;i++)
-		for(j=FIRST_LINE; j<LINES_QTY ;j++)
-			realVideo[(j*LINE_SIZE)+i]= virtualVideo[j][i];
+	int i;
+	for(i=FIRST_CHAR; i<(LINE_SIZE*LINES_QTY) ;i++)
+			realVideo[i]= virtualVideo[i/LINE_SIZE][i%LINE_SIZE];
 		
 }
 
