@@ -21,5 +21,6 @@ void realwrite();
 char read();
 void refreshScreen();
 void setUpVideo();
+void scrollup();
 
 #endif

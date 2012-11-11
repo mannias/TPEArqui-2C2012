@@ -3,8 +3,16 @@
 
 
 void startShell(){
-
-	printf("lala%d\n", 123123);
+	char *string;
+	int flag= 1;
+	tCommandsBuffer commands_buffer;
+	
+	while(flag){
+		putc("$");
+		scanf("%s", string);
+		strcpy(commands_buffer.buffer[commands_buffer.currentline], string);
+		parse(string, &flag);
+		}
 }
 
 
