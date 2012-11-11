@@ -126,6 +126,7 @@ void scanf(const char *data, ...){
                 case 'c':
                     getChar(va_arg(args,char*), &pos, text);
                 case 'd':
+                    return;
             }
             comming = 0; 
         }else if(actual == text[pos++]){

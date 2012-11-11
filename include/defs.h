@@ -39,6 +39,7 @@
 
 #pragma pack (1) 		/* Alinear las siguiente estructuras a 1 byte */
 
+
 /* Descriptor de segmento */
 typedef struct {
   word limit,

@@ -33,7 +33,7 @@ char* strchr(char* cs, char* c){
 	return NULL;
 }
 /* regresa la longitud de cs */
-size_t srtlen(char* cs){
+int srtlen(char* cs){
 	int i = 0;
 	while(cs[i] != '\0'){
 		i++
