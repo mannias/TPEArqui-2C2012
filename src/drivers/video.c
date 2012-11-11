@@ -1,4 +1,5 @@
 #include "video.h"
+#include "../library/stdlib.h"
 
 
 char virtualVideo[LINES_QTY][LINE_SIZE];
@@ -56,7 +57,7 @@ virtualwrite (char c) {
 		case ENTER: 
 			if(vcursor.line == (LINES_QTY -1)) {
 				scrollup();
-				refreshscreen();
+				refreshScreen();
 			}
 			vcursor.line++;
 			vcursor.character= FIRST_CHAR;

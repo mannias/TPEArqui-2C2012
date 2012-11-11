@@ -9,6 +9,7 @@ void putint(int data);
 int checkprecision(const char* actual);
 void putdouble(double num, int pres);
 char* getUpstream(char *vec);
+void cleanBuffer();
 
 void printf(const char *data, ...){
         va_list args;
@@ -143,4 +144,10 @@ char* getUpstream(char *vec){
     putc('\n');
     vec[pos] = '\n';
     return vec;
+}
+
+void cleanBuffer(){
+    if(getc()!= NULL){
+        while(getc()!='\n');
+    }
 }

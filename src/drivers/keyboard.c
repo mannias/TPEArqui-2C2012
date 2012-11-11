@@ -57,19 +57,19 @@ startKeyboard(){
 	shiftFlag = 0;
 	mayus = 0;
 	for(i=0; i< BUFFER_LEN; i++){
-		keyboard_buffer[i] = 0;
+		keyboard_buffer[i] = '\0';
 	}
 }
 
 char getKeyboardChar(){
 	if(loc == -1){
-		if(keyboard_buffer[BUFFER_LEN-1] == NULL){
+		if(keyboard_buffer[BUFFER_LEN-1] == '\0'){
 			return NULL;
 		}
 		loc = BUFFER_LEN-1;
 	}
 	char aux;
 	aux = keyboard_buffer[loc];	//limpio el buffer
-	keyboard_buffer[loc--] = 0;
+	keyboard_buffer[loc--] = '\0';
 	return aux;
 }
