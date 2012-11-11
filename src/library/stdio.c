@@ -111,10 +111,6 @@ void scanf(const char *data, ...){
     char actual;
     char* text;
     text = getUpstream(text);
-    int i;
-    for(i=0; text[i] != '\n'; i++){
-      putc('a');
-    }
     putc('\n');
     va_start(args, data);
 

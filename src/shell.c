@@ -4,7 +4,8 @@
 
 
 void startShell(){
-	scanf(" ");
+	//putc(getc());
+	scanf("");
 }
 
 int
