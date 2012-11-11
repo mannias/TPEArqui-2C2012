@@ -21,3 +21,19 @@ strcmp(char str1[], char str2[]) {
 	return FALSE;
 }
 
+int
+test() {
+	int i;
+	char str1[3]= "asd";
+	char str2[3]= "zxc";
+	strcpy(str1, str2);
+	while(*str1 == *str2) {
+		if(i==3)
+			return TRUE;
+		str1++;
+		str2++;
+		i++;
+	}
+	return FALSE;
+}
+
