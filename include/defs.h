@@ -25,10 +25,12 @@
 #define ACS_STACK       (ACS_PRESENT | ACS_DSEG | ACS_WRITE)
 
 #define ENTER			10
-#define TAB				01
-#define BACKSPACE		02
-#define BACK_ARROW		03
-#define FORW_ARROW		04
+#define TAB				09
+#define BACKSPACE		08
+#define UP_ARROW		24
+#define DOWN_ARROW		25
+#define FORW_ARROW		26
+#define BACK_ARROW		27
 
 #define NULL  0
 
