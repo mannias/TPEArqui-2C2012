@@ -27,7 +27,7 @@ strcmp(char str1[], char str2[]) {
 	int i, aux=0;
 	for(i=0; str1[i] && str2[i] && !aux ;i++) {
 		aux= str1[i] -str2[i];
-
+	}
 	return aux;
 }
 
@@ -46,5 +46,6 @@ test() {
 	char str1[5]= "asdfg";
 	char str2[5]= "zxcvb";
 	strncpy(str1, str2, 5);
-	return strncmp(str1, str2);
+	return strncmp(str1, str2, 5);
 }
+
