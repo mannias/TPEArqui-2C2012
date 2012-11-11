@@ -15,6 +15,18 @@ typedef struct {
 	int character;
 } tCursor;
 
+typedef struct {
+	char buffer[LINES_QTY][LINE_SIZE];
+	int currentline;
+} tCommandsBuffer;
+
+typedef struct {
+	char virtualVideo[LINES_QTY][LINE_SIZE];
+	tCursor vcursor;
+	tCommandsBuffer commands_buffer;
+} tVirConsole;
+	
+
 void write(char c);
 void virtualwrite(char c);
 void realwrite();

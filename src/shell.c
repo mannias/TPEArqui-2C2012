@@ -4,7 +4,12 @@
 
 
 void startShell(){
-	cleanBuffer();
-	scanf("s");
+	char *string;
+	int flag= 1;
+	
+	while(flag){
+		putc('$');
+		scanf("%s", string);
+		}
 }
 
