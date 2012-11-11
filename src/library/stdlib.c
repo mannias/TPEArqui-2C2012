@@ -1,28 +1,22 @@
 #include "stdlib.h" 
 
 void 
-strcpy(char *to, char *from) {
+strcpy(char to[], char from[]) {
+	int i;
+	for(i=0; to[i] && from[i]; i++)
+		to[i]= from[i];
 
-	while(*to && *from) {
-		*to= *from;
-		to++;
-		from++;
-	} 
-	if(!(*from))
-		*to= *from;
+	if(!(from[i]))
+		to[i]= from[i];
 }
 
 int
-strcmp(char *str1, char *str2) {
-	int flag= TRUE;
-	while(*str1 && *str2 && flag) {
-		if(*str1 == *str2) {
-			str1++;
-			str2++;
-		} else
+strcmp(char str1[], char str2[]) {
+	int i, flag= TRUE;
+	for(i=0; str1[i] && str2[i] && flag ;i++)
+		if(str1[i] != str2[i])
 			flag= FALSE;
-	}
-	if(*str1 == *str2)
+	if(str1[i] == str2[i])
 		return flag;
 	return FALSE;
 }
