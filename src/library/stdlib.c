@@ -23,13 +23,8 @@ strcmp(char str1[], char str2[]) {
 
 int
 test() {
-	int i;
 	char str1[5]= "asdfg";
 	char str2[5]= "zxcvb";
 	strcpy(str1, str2);
-	
-	for(i=0; str1[i] == str2[i] ;i++) {
-		if(i==4)
-			return TRUE;
-	return FALSE;
+	return strcmp(str1, str2);
 }
