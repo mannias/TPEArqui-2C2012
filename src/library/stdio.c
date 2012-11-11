@@ -53,6 +53,7 @@ void printf(const char *data, ...){
         	}
         }
         va_end(args);
+        putc('\n');
 }
 
 void printstring(char* string){
@@ -88,7 +89,7 @@ void putint(int data){
 
 void printint(int data){
     if(data < 0){
-        write2('-');
+        putc('-');
         data *= (-1);
     }
     putint(data);
@@ -96,19 +97,13 @@ void printint(int data){
 }
 
 void putc(char data){
-    write2(data);
+    write(data);
 }
 
 char *video= (char *) 0xb8000;
 int pos = 0;
 
-void write2(char data){
-    video[pos] = data;
-    pos+=2;
-    if(pos >= (80*25*2)){
-        pos = 0;
-    }
-}
+
 
 char getc(){
     read();

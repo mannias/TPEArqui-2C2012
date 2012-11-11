@@ -50,7 +50,6 @@ kmain()
         _mascaraPIC2(0xFF);
         
 	_Sti();
-
         while(1)
         {
         	startShell();

@@ -15,6 +15,6 @@ typedef __builtin_va_list va_list;
 void printf(const char *data, ...);
 void putc(char data);
 char getc();
-void scanf(const char *data, ...)
+void scanf(const char *data, ...);
 
 #endif

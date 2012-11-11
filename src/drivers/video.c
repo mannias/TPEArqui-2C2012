@@ -49,54 +49,57 @@ realwrite() {
 
 void
 virtualwrite (char c) {
-	int i, j;
-	
-/*	switch(c) {
-	
+	int i;
+
+	switch(c) {
+
 		case ENTER: 
 			vcursor.line++;
 			vcursor.character= FIRST_CHAR;
 			break;
-	
+
 		case TAB: 
-			for(i=0; i<4 && (vcursor.character != (LINE_SIZE -2)) ;i++)
+			for(i=0; i<4 && (vcursor.character < LINE_SIZE) ;i++)
 				virtualVideo[vcursor.line][vcursor.character+=2]= ' ';
 			break;
-		
+
 		case BACKSPACE: 
-			if(vcursor.character != FIRST_CHAR) {
+			if(vcursor.character > FIRST_CHAR) {
 				vcursor.character-= 2;
 				write(' ');
 			}
 			break;
-		
+
 		case BACK_ARROW: 
-			if(vcursor.character != FIRST_CHAR)
+			if(vcursor.character > FIRST_CHAR)
 				vcursor.character-= 2;
 			break;
 
 		case FORW_ARROW: 
-			if(vcursor.character != (LINE_SIZE -2))
+			if(vcursor.character < LINE_SIZE)
 				vcursor.character+= 2;
 			break;
-			
+
 		default:
-			if(vcursor.character != (LINE_SIZE -2)) {
+			if(vcursor.character < LINE_SIZE) {
 				virtualVideo[vcursor.line][vcursor.character]= c;
-				
 				vcursor.character+= 2;
 			}
-	}	*/
+			else if(vcursor.line < LINES_QTY) {
+			vcursor.character= 0;
+			vcursor.line++;
+			}
+	}
 
-	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++){
+	/*
+	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
 		for(j=FIRST_LINE; j<LINES_QTY ;j++) {
 			virtualVideo[j][i*2]= c;
 			virtualVideo[j][(i*2)+1]= WHITE_TXT;
 		}
-	}
 	vcursor.character= LINE_SIZE -1;
 	vcursor.line= LINES_QTY -1;
-	
+	*/
 }
 
 void
