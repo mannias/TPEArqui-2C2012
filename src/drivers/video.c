@@ -20,8 +20,7 @@ setUpVideo(){
 			virtualVideo[j][i*2]= ' ';
 			virtualVideo[j][(i*2)+1]= WHITE_TXT;
 		}
-	
-	
+
 }
 
 void
@@ -87,30 +86,17 @@ virtualwrite (char c) {
 				virtualVideo[vcursor.line][vcursor.character]= c;
 				vcursor.character+= 2;
 			}
-			else if(vcursor.line < LINES_QTY) {
-			vcursor.character= 0;
-			vcursor.line++;
-			}
 	}
 
-	/*
-	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
-		for(j=FIRST_LINE; j<LINES_QTY ;j++) {
-			virtualVideo[j][i*2]= c;
-			virtualVideo[j][(i*2)+1]= WHITE_TXT;
-		}
-	vcursor.character= LINE_SIZE -1;
-	vcursor.line= LINES_QTY -1;
-	*/
 }
 
 void
 refreshScreen() {
-	int i;
-	for(i=FIRST_CHAR; i<(LINE_SIZE*LINES_QTY) ;i++){
-		realVideo[i]= virtualVideo[i/LINE_SIZE][i%LINE_SIZE];
-	}
-		
+	int i, j;
+	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
+		for(j=FIRST_LINE; j<LINES_QTY ;j++)
+			virtualVideo[j][i*2]= ' ';
+
 }
 
 
