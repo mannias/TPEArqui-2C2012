@@ -10,6 +10,10 @@ void startShell(){
 	while(flag){
 		putc('$');
 		scanf("%s", string);
+<<<<<<< HEAD
+=======
+//		parse(string, &flag);
+>>>>>>> scrollup patch v2.1
 		}
 }
 
