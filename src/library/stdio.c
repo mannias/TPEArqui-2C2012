@@ -122,14 +122,15 @@ void scanf(const char *data, ...){
             comming = 1;
         }else if(comming = 1){
 
+        }else if(actual == text[pos++]){
+            printf("OK");
         }else{
-
+            printf("NADA");
+            return;
         }
+
     }
-
-
     va_end(args);
-
 }
 
 
