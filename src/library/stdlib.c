@@ -25,20 +25,20 @@ strncpy(char to[], char from[], int n) {
 int
 strcmp(char str1[], char str2[]) {
 	int i, aux=0;
-	for(i=0; str1[i] && str2[i] && !aux ;i++) {
+	for(i=0; str1[i] && str2[i] && !aux ;i++)
 		aux= str1[i] -str2[i];
-	}
+
 	return aux;
 }
 
 int
 strncmp(char str1[], char str2[], int n) {
 	int i, aux=0;
-	for(i=0; str1[i] && str2[i] && !aux && i<n ;i++) {
+	for(i=0; str1[i] && str2[i] && !aux && i<n ;i++)
 		aux= str1[i] -str2[i];
 
 	return aux;
-}	
+	
 }
 
 int
