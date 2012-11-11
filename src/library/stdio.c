@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "string.h"
 
 void printstring(char* string);
 void printint(int data);
@@ -11,6 +12,7 @@ void putdouble(double num, int pres);
 char* getUpstream(char *vec);
 void cleanBuffer();
 void getChar(char* dir, int* pos, char* text);
+void getString(char* dir, int* pos, char* text);
 
 void printf(const char *data, ...){
         va_list args;
@@ -125,8 +127,10 @@ void scanf(const char *data, ...){
             switch(actual){
                 case 'c':
                     getChar(va_arg(args,char*), &pos, text);
-                case 'd':
-                    return;
+                    break;
+                case 's':
+                    getString(va_arg(args,char*), &pos, text);
+                    break;
             }
             comming = 0; 
         }else if(actual == text[pos++]){
@@ -140,17 +144,20 @@ void scanf(const char *data, ...){
     va_end(args);
 }
 
-void findChunk(char *data){
-
-}
-
 void getChar(char* dir, int* pos, char* text){
     *dir = text[*pos++];
 }
 
-void getString(char** dir, int* pos, char* text, char* base){
-
+void getString(char* dir, int* pos, char* text){
+    int loc = 0;
+    while(text[*pos] != '\0' && text[*pos] != ' '){
+        putint(*pos);
+        putc(text[*pos]);
+        dir[loc++] = text[*pos++];  
+    }
+    dir[loc] = '\0';
 }
+
 
 char* getUpstream(char *vec){
     char upstream;

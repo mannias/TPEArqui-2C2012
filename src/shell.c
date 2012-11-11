@@ -5,10 +5,11 @@
 
 
 void startShell(){
-	char let;
+	char data[10];
+	//char let;
 	//printint(test());
-	scanf("a%c",&let);
-	putc(let);
+	scanf("%s", data);
+	//printf("%s", data);
 }
 
 int

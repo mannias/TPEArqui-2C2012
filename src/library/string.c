@@ -32,6 +32,39 @@ char* strchr(char* cs, char* c){
 	}
 	return NULL;
 }
+/* apuntador a la primera ocurrencia de c en cs con n caracteres */
+char* strnchr(char* cs, char* c, int num){
+	char* aux = cs;
+	int status = 0;
+	int sum = 0;
+	int pos1 = 0;
+	int pos2 = 0;
+	int loc = 0;
+	int size = strlen(c);
+	while(cs[pos1] != '\0' && c[pos2] != '\0' ){
+		if(status == 0){
+			if(cs[pos1] == c[pos2]){
+				loc = pos1;
+				status = 1;
+			}else{
+				pos1++;
+			}
+		}else if(status == 1){
+			if(cs[pos1++] == c[pos2++] && sum < num){
+				sum++;
+			}else{
+				if(sum == num){
+					return *cs+loc;
+				}
+				status = 0;
+			}
+		}
+	}
+	if(sum == size{
+		return *cs+loc;
+	}
+	return NULL;
+}
 /* regresa la longitud de cs */
 int srtlen(char* cs){
 	int i = 0;
@@ -40,3 +73,6 @@ int srtlen(char* cs){
 	}
 	return i-1;
 }
+
+int 
+
