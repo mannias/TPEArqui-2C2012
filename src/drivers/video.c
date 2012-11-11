@@ -54,6 +54,10 @@ virtualwrite (char c) {
 	switch(c) {
 
 		case ENTER: 
+			if(vcursor.line == (LINES_QTY -1)) {
+				scrollup();
+				refreshscreen();
+			}
 			vcursor.line++;
 			vcursor.character= FIRST_CHAR;
 			break;
@@ -87,6 +91,17 @@ virtualwrite (char c) {
 			}
 	}
 
+}
+
+void
+scrollup() {
+	int i;
+	
+	for(i=0; i<(LINES_QTY -1) ;i++) {
+		strcpy(virtualVideo[i], virtualVideo[++i]);
+	}
+	vcursor.line--;
+	rcursor.line= vcursor.line;
 }
 
 void

@@ -3,10 +3,15 @@
 
 
 void startShell(){
-	scanf("d");
+	char *string;
+	int flag= 1;
+	tCommandsBuffer commands_buffer;
+	
+	while(flag){
+		putc("$");
+		scanf("%s", string);
+		strcpy(commands_buffer.buffer[commands_buffer.currentline], string);
+		parse(string, &flag);
+		}
 }
-
-
-
-
 
