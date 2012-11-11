@@ -115,49 +115,50 @@ char getc(){
 }
 
 void scanf(const char *data, ...){
-    va_list args;
-    int d;
-    char actual;
-    int comming = 0;
-    int escaped = 0;
-    char *c, *p, **s;
-    int* i;
-    double* d;
+    // va_list args;
+    // int d;
+    // char actual;
+    // int comming = 0;
+    // int escaped = 0;
+    // char *c, *p, **s;
+    // int* i;
+    // double* d;
 
-    int paso = 0;
-    va_start(args, data);
-    while ((actual = *data++) != '\0'){
-        if(actual == '%' && escaped == 0){
-            comming = 1;
-        }else if(escaped == 1){
-            escaped = 0;
-        }else if(actual == '\\'){
-            escaped = 1;
-        }else if(comming == 1){
-            switch(actual) {
-                case 's':                       /* string */
-                    s = va_arg(args, char**);
-                    printstring(s);
-                    break;
-                case 'd':     
-                case 'i':
-                    i = va_arg(args, int*);
-                    break;
-                case 'c':                       /* char */
-                    c = (char) va_arg(args, char*);
-                    break;
-                case 'f':
-                case 'e':
-                case 'E':
-                    d  = va_arg(args, double*);
-                default:
-                    break;
-            }
-            comming = 0;
-        }else{
-            putc(actual);
-        }
-    }
-    va_end(args);
+    // int paso = 0;
+    // va_start(args, data);
+    // while ((actual = *data++) != '\0'){
+    //     if(actual == '%' && escaped == 0){
+    //         comming = 1;
+    //     }else if(escaped == 1){
+    //         escaped = 0;
+    //     }else if(actual == '\\'){
+    //         escaped = 1;
+    //     }else if(comming == 1){
+    //         switch(actual) {
+    //             case 's':                       /* string */
+    //                 s = va_arg(args, char**);
+    //                 printstring(s);
+    //                 break;
+    //             case 'd':     
+    //             case 'i':
+    //                 i = va_arg(args, int*);
+    //                 break;
+    //             case 'c':                       /* char */
+    //                 c = (char) va_arg(args, char*);
+    //                 break;
+    //             case 'f':
+    //             case 'e':
+    //             case 'E':
+    //                 d  = va_arg(args, double*);
+    //             default:
+    //                 break;
+    //         }
+    //         comming = 0;
+    //     }else{
+    //         putc(actual);
+    //     }
+    // }
+    // va_end(args);
+
 }
 
