@@ -112,7 +112,7 @@ void scanf(const char *data, ...){
     char* text;
     text = getUpstream(text);
     int i;
-    for(i=0; text[i] != '\0'; i++){
+    for(i=0; text[i] != '\n'; i++){
       putc('a');
     }
     putc('\n');
@@ -129,6 +129,7 @@ char* getUpstream(char *vec){
     for(pos = 0; pos < 80 ; pos++){
         vec[pos] = '\0';
     }
+    pos = 0;
     while((upstream = getc()) != '\n'){
         if(upstream == BACKSPACE){
             if(pos > 0){
@@ -141,10 +142,18 @@ char* getUpstream(char *vec){
         putc(upstream);
     }
     putc('\n');
-    vec[pos] = '\0';
+    vec[pos] = '\n';
     return vec;
 }
 
 void cleanBuffer(){
     while(getc()!= '\n');
+}
+
+void wait(){
+    long i;
+    long w;
+    for(i=0; i< 1000000000; i++){
+        w=(i/23214)*24234234+234235/3123;
+    }
 }

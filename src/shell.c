@@ -7,3 +7,10 @@ void startShell(){
 	scanf(" ");
 }
 
+int
+parse(char *str, int *flag) {
+
+	return TRUE;
+
+}
+

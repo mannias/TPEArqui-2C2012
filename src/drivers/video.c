@@ -99,6 +99,8 @@ scrollup() {
 	
 	for(i=0; i<(LINES_QTY -1) ;i++) {
 		strcpy(vcon.virtualVideo[i], vcon.virtualVideo[i+1]);
+		refreshScreen();
+
 	}
 	for(j=0; j<LINE_SIZE ;j++) {
 		vcon.virtualVideo[i][j]= ' ';
