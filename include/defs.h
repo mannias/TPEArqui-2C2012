@@ -24,7 +24,7 @@
 #define ACS_DATA        (ACS_PRESENT | ACS_DSEG | ACS_WRITE)
 #define ACS_STACK       (ACS_PRESENT | ACS_DSEG | ACS_WRITE)
 
-#define ENTER			'/n'
+#define ENTER			10
 #define TAB				01
 #define BACKSPACE		02
 #define BACK_ARROW		03
