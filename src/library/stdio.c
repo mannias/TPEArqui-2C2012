@@ -116,6 +116,7 @@ void scanf(const char *data, ...){
     text = getUpstream(text);
     va_start(args, data);
     while((actual = *data++)!='\0'){
+        printf("nada");
         if(actual == '\\'){
             escaped = 1;
         }else if(actual == '%' && escaped == 0){

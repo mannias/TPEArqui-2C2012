@@ -5,7 +5,7 @@
 
 void startShell(){
 	//putc(getc());
-	scanf(" ");
+	scanf("asdasd");
 }
 
 int
