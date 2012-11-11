@@ -4,7 +4,7 @@
 
 void startShell(){
 
-	printf("lala%d.", 123123);
+	printf("lala%d\n", 123123);
 }
 
 

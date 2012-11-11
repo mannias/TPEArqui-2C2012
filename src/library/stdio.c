@@ -53,7 +53,6 @@ void printf(const char *data, ...){
         	}
         }
         va_end(args);
-        putc('\n');
 }
 
 void printstring(char* string){
