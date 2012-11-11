@@ -3,8 +3,7 @@
 
 
 void startShell(){
-
-	printf("lala%d\n", 123123);
+	scanf("d");
 }
 
 
