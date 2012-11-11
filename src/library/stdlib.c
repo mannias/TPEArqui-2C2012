@@ -46,5 +46,5 @@ test() {
 	char str1[5]= "asdfg";
 	char str2[5]= "zxcvb";
 	strncpy(str1, str2, 5);
-	return strncmp(str1, str2);
+	return strncmp(str1, str2, 5);
 }
