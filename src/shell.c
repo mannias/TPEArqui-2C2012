@@ -5,7 +5,6 @@
 void startShell(){
 	char *string;
 	int flag= 1;
-	tCommandsBuffer commands_buffer;
 	
 	while(flag){
 		putc("$");
