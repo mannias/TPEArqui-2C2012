@@ -108,11 +108,25 @@ char getc(){
 
 void scanf(const char *data, ...){
     va_list args;
+    int comming = 0;
+    int escaped = 0;
     char actual;
     char* text;
+    int pos =0;
     text = getUpstream(text);
-    putc('\n');
     va_start(args, data);
+    while((actual = *data++)!='\0'){
+        if(actual == '\\'){
+            escaped = 1;
+        }else if(actual == '%' && escaped == 0){
+            comming = 1;
+        }else if(comming = 1){
+
+        }else{
+
+        }
+    }
+
 
     va_end(args);
 
