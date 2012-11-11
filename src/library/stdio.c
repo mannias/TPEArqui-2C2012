@@ -116,13 +116,12 @@ void scanf(const char *data, ...){
     text = getUpstream(text);
     va_start(args, data);
     while((actual = *data++)!='\0'){
-        printf("nada");
         if(actual == '\\'){
             escaped = 1;
         }else if(actual == '%' && escaped == 0){
             comming = 1;
-        }else if(comming = 1){
-
+        }else if(comming == 1){
+            comming = 0; 
         }else if(actual == text[pos++]){
             printf("OK");
         }else{
