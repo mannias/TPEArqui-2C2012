@@ -31,5 +31,6 @@ test() {
 	for(i=0; str1[i] == str2[i] ;i++) {
 		if(i==4)
 			return TRUE;
+	}
 	return FALSE;
 }

@@ -10,6 +10,7 @@ int checkprecision(const char* actual);
 void putdouble(double num, int pres);
 char* getUpstream(char *vec);
 void cleanBuffer();
+void getChar(char* dir, int* pos, char* text);
 
 void printf(const char *data, ...){
         va_list args;
@@ -121,11 +122,16 @@ void scanf(const char *data, ...){
         }else if(actual == '%' && escaped == 0){
             comming = 1;
         }else if(comming == 1){
+            switch(actual){
+                case 'c':
+                    getChar(va_arg(args,char*), &pos, text);
+                case 'd':
+            }
             comming = 0; 
         }else if(actual == text[pos++]){
-            printf("OK");
+            escaped = 0;
         }else{
-            printf("NADA");
+            printf("rompe");
             return;
         }
 
@@ -133,6 +139,17 @@ void scanf(const char *data, ...){
     va_end(args);
 }
 
+void findChunk(char *data){
+
+}
+
+void getChar(char* dir, int* pos, char* text){
+    *dir = text[*pos++];
+}
+
+void getString(char** dir, int* pos, char* text, char* base){
+
+}
 
 char* getUpstream(char *vec){
     char upstream;

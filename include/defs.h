@@ -32,6 +32,9 @@
 #define FORW_ARROW		26
 #define BACK_ARROW		27
 
+#define TRUE 1
+#define FALSE 0
+
 #define NULL  0
 
 #pragma pack (1) 		/* Alinear las siguiente estructuras a 1 byte */
