@@ -110,10 +110,9 @@ void scanf(const char *data, ...){
     va_list args;
     char actual;
     char* text;
-    //while(getc()!= '\n');
     text = getUpstream(text);
     int i;
-    for(i=0; text[i] != '\n'; i++){
+    for(i=0; text[i] != '\0'; i++){
       putc('a');
     }
     putc('\n');
@@ -125,9 +124,9 @@ void scanf(const char *data, ...){
 
 
 char* getUpstream(char *vec){
-    char upstream = getc();
+    char upstream;
     int pos = 0;
-    for(pos = 0; vec[pos] != '\0' ; pos++){
+    for(pos = 0; pos < 80 ; pos++){
         vec[pos] = '\0';
     }
     while((upstream = getc()) != '\n'){
@@ -142,7 +141,7 @@ char* getUpstream(char *vec){
         putc(upstream);
     }
     putc('\n');
-    vec[pos] = '\n';
+    vec[pos] = '\0';
     return vec;
 }
 

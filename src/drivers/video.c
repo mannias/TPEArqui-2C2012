@@ -109,10 +109,9 @@ scrollup() {
 
 void
 refreshScreen() {
-	int i, j;
-	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
-		for(j=FIRST_LINE; j<LINES_QTY ;j++)
-			vcon.virtualVideo[j][i*2]= ' ';
+	int i;
+	for(i=FIRST_CHAR; i<(LINE_SIZE*LINES_QTY) ;i++)
+			realVideo[i]= vcon.virtualVideo[i/LINE_SIZE][i%LINE_SIZE];
 
 }
 

@@ -4,7 +4,6 @@
 
 
 void startShell(){
-	cleanBuffer();
 	scanf(" ");
 }
 
