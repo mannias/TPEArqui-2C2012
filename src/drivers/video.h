@@ -8,6 +8,8 @@
 #define LINES_QTY  25
 #define LINE_SIZE  160
 
+#define WHITE_TXT 0x07
+
 typedef struct {
 	int line;
 	int character;
