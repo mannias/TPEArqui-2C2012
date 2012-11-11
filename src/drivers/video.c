@@ -20,7 +20,7 @@ setUpVideo(){
 			virtualVideo[j][i]= ' ';
 	
 	virtualwrite('A');
-	refreshScreen();
+	write('a');
 }
 
 void
@@ -83,8 +83,8 @@ virtualwrite (char c) {
 	}	*/
 	int w;
 	for(i=0; i<25 ;i++){
-		for(w=0; w<160; w++){
-			virtualVideo[i][w]= c;
+		for(w=0; w<80; w++){
+			virtualVideo[i][w*2]= c;
 		}
 	}
 	vcursor.character= LINE_SIZE -1;

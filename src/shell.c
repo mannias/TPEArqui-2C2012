@@ -1,5 +1,5 @@
 #include "../include/shell.h"
-#include "../include/stdio.h"
+#include "library/stdio.h"
 
 
 void startShell(){
