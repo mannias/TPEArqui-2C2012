@@ -6,6 +6,6 @@
 
 void strcpy(char *to, char *from);
 int strcmp(char *str1, char *str2);
-
+int test();
 
 #endif
