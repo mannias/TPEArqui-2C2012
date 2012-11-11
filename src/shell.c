@@ -5,15 +5,20 @@
 
 void startShell(){
 	char *string;
-	int flag= 1;
+	int flag= TRUE;
 	
 	while(flag){
 		putc('$');
 		scanf("%s", string);
-<<<<<<< HEAD
-=======
-//		parse(string, &flag);
->>>>>>> scrollup patch v2.1
+		parse(string, &flag);
+
 		}
+}
+
+int
+parse(char *str, int *flag) {
+
+	return TRUE;
+
 }
 
