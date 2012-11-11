@@ -147,7 +147,5 @@ char* getUpstream(char *vec){
 }
 
 void cleanBuffer(){
-    if(getc()!= NULL){
-        while(getc()!='\n');
-    }
+    while(getc()!= '\n');
 }
