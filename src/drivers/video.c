@@ -98,7 +98,7 @@ scrollup() {
 	int i, j;
 	
 	for(i=0; i<(LINES_QTY -1) ;i++) {
-		strcpy(*(vcon.virtualVideo+(i*LINE_SIZE)), *(vcon.virtualVideo+(i+1)*LINE_SIZE));
+		strcpy(vcon.virtualVideo[i], vcon.virtualVideo[i+1]);
 	}
 	for(j=0; j<LINE_SIZE ;j++) {
 		vcon.virtualVideo[i][j]= ' ';
