@@ -13,6 +13,7 @@ char* getUpstream(char *vec);
 void cleanBuffer();
 void getChar(char* dir, int* pos, char* text);
 void getString(char* dir, int* pos, char* text);
+void getInt(int* dir, int* pos, char* text);
 
 void printf(const char *data, ...){
         va_list args;
@@ -131,6 +132,9 @@ void scanf(const char *data, ...){
                 case 's':
                     getString(va_arg(args,char*), &pos, text);
                     break;
+                case 'i':
+                    getInt(va_arg(args,int*), &pos, text);
+                    break;
             }
             comming = 0; 
         }else if(actual == text[pos++]){
@@ -159,9 +163,15 @@ void getString(char* dir, int* pos, char* text){
 void getInt(int* dir, int* pos, char* text){
     char vec[20];
     int loc = 0;
+
     while(isdigit(text[*pos])){
         vec[loc++] = text[(*pos)++]; 
     }
+    vec[loc] = '\0';
+    if(loc == 0){
+        (*dir) = 0;
+    }
+    (*dir) = atoi(vec);
 }
 
 

@@ -41,12 +41,16 @@ strncmp(char str1[], char str2[], int n) {
 	
 }
 
-int
-test() {
-
-	char str1[]= "asdfg";
-	char str2[]= "zxcvb";
-	strcpy(str1, str2);
-	return strcmp(str1, str2);
+int atoi(const char *s){
+	int i =0;
+	int sig = 1;
+	int final = 0;
+	while(s[i] != '\0'){
+		if(s[i] == '-'){
+			sig = -1;
+		}
+		final = final*10 + (s[i++] - '0');
+	}
+	return final;
 }
 
