@@ -1,14 +1,42 @@
 #include "malloc.h"
 
 char* toHex(char* hex, char* pointer);
+void mergeNext(mem_header node);
+void mergeContinuous();
 
 void initMalloc(){
+	long length = checkMem();
+	length *= 1048576;
 	mem_header node = (mem_header)FIRST_SEGMENT;
 	node->next = NULL;
-	node->length = MEM_LENGTH;
+	node->length = length;
 	node->used = FALSE;
-	int i;
 }
+
+int checkMem(){
+	char* mem = (char*)0x200000;
+	int space = 1048576;
+	int i=0;
+	char vec[9];
+	int error = 0;
+	while(!error){
+		*mem = 0;
+		if(*mem == 0){
+			*mem = 1;
+			if(*mem != 1){
+				error = 1;
+			}
+		}else{
+			error = 1;
+		}
+		mem = mem + space;
+		if(!error){
+			i++;
+		}
+	}
+	return i;
+}
+
 
 void* malloc(int length){
 	mem_header node, firstnode;
@@ -16,12 +44,12 @@ void* malloc(int length){
 	firstnode = node = (mem_header)FIRST_SEGMENT;
 	int found = 0;
 	do{
-		if(node->length >= length && node->used == FALSE){
+		if(node->length + sizeof(mem_segment) >= length && node->used == FALSE){
 			mem_header nextnode = (mem_header)((char*)node + sizeof(mem_segment) + length);
 			nextnode->next = node->next;
 			nextnode->length = node->length - ( sizeof(mem_segment) + length);
 			nextnode->used = FALSE;
-			node->length = length;
+			node->length = length + sizeof(mem_segment);
 			node->next = nextnode;
 			node->used = TRUE;
 			found = 1;
@@ -30,40 +58,38 @@ void* malloc(int length){
 		}
 	}while(node != NULL && !found);
 	if(found){
-		return (void*) node+sizeof(mem_header);
+		return (void*) node + sizeof(mem_segment);
 	}
 	return NULL;
 
 }
 
-void simulate(){
-	mem_header node,firstnode;
-	node = firstnode = (mem_header)FIRST_SEGMENT;
-	int i;
-	int length = 12;
-	for(i=0; i<5; i++){
-		mem_header nextnode = (mem_header)(node + sizeof(mem_segment) + length);
-		nextnode->next = node->next;
-		nextnode->length = node->length - ( sizeof(mem_segment) + length);
-		nextnode->used = FALSE;
-		node->length = length;
-		node->next = nextnode;
-		node->used = TRUE;
-		node = node->next;
-	}
-	node->next = NULL;
+void* free(char* dir){
+	char vec[9];
+	mem_header headnode = (mem_header) ((char*)dir - sizeof(mem_segment));
+	headnode->used = FALSE;
+
+	mergeContinuous();
+	// while(headnode->next != NULL && headnode->next->used == FALSE){
+	// 	headnode->length = headnode->length + headnode->next->length;
+	// 	headnode->next = headnode->next->next;
+	// }
 }
 
+void mergeContinuous(){
+	mem_header node = (mem_header)FIRST_SEGMENT;
+	while(node != NULL){
+		if(node->used == FALSE){
+			mergeNext(node);
+		}
+		node = node->next;
+	}
+}
 
-
-
-void* free(char* dir){
-	mem_header headnode = (mem_header) (dir - sizeof(mem_segment));
-	headnode->used = FALSE;
-	while(headnode->next != NULL && headnode->next->used == FALSE){
-		headnode->length = headnode->length + headnode->next->length;
-		headnode->next = headnode->next->next;
-
+void mergeNext(mem_header node){
+	while(node->next != NULL && node->next->used == FALSE){
+		node->length = node->length + node->next->length;
+		node->next = node->next->next;
 	}
 }
 

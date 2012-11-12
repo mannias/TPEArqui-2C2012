@@ -19,6 +19,9 @@ kmain()
 
     int i,num;
 
+/* Limpieza registros bios */
+    i=1-1;
+
 /* Borra la pantalla. */ 
 
 	k_clear_screen();
