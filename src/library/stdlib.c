@@ -45,7 +45,7 @@ int
 test() {
 
 	char str1[]= "asdfg";
-	char str2[]= "zxcvb";
+	char str2[]= "asdfg";
 	strcpy(str1, str2);
 	return strcmp(str1, str2);
 }
