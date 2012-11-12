@@ -18,6 +18,7 @@ typedef struct {
 typedef struct {
 	char buffer[LINES_QTY][LINE_SIZE];
 	int currentline;
+	int index;
 } tCommandsBuffer;
 
 typedef struct {
@@ -32,7 +33,8 @@ void virtualwrite(char c);
 void realwrite();
 char read();
 void refreshScreen();
+void refreshLine(int n);
 void setUpVideo();
-void scrollup();
+void scrollup(char mat[LINES_QTY][LINE_SIZE]);
 
 #endif
