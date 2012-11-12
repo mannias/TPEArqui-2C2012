@@ -43,9 +43,9 @@ strncmp(char str1[], char str2[], int n) {
 
 int
 test() {
-	char str1[6]= "asdfg";
-	char str2[6]= "zxcvb";
-	strncpy(str1, str2);
+	char* str1= "asdfg";
+	char* str2= "asdfg";
+	strcpy(str1, str2);
 	return strcmp(str1, str2);
 }
 

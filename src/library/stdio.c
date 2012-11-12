@@ -1,5 +1,5 @@
 #include "stdio.h"
-#include "string.h"
+#include "ctype.h"
 
 void printstring(char* string);
 void printint(int data);
@@ -145,17 +145,23 @@ void scanf(const char *data, ...){
 }
 
 void getChar(char* dir, int* pos, char* text){
-    *dir = text[*pos++];
+    *dir = text[(*pos)++];
 }
 
 void getString(char* dir, int* pos, char* text){
     int loc = 0;
     while(text[*pos] != '\0' && text[*pos] != ' '){
-        putint(*pos);
-        putc(text[*pos]);
-        dir[loc++] = text[*pos++];  
+        dir[loc++] = text[(*pos)++];  
     }
     dir[loc] = '\0';
+}
+
+void getInt(int* dir, int* pos, char* text){
+    char vec[20];
+    int loc = 0;
+    while(isdigit(text[*pos])){
+        vec[loc++] = text[(*pos)++]; 
+    }
 }
 
 
