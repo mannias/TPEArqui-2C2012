@@ -56,8 +56,12 @@ virtualwrite (char c) {
 		case ENTER: 
 			if(vcon.vcursor.line == (LINES_QTY -1)) {
 				scrollup();
-				refreshScreen();
+				vcon.vcursor.line--;
+				rcursor.line= vcon.vcursor.line;
+				refreshScreen(vcon.virtualVideo);
 			}
+			strncpy(vcon.commands_buffer.buffer[vcon.commands_buffer.currentline], vcon.virtualVideo[vcon.vcursor.line], LINE_SIZE);
+			vcon.commands_buffer.currentline++;
 			vcon.vcursor.line++;
 			vcon.vcursor.character= FIRST_CHAR;
 			break;
@@ -94,17 +98,15 @@ virtualwrite (char c) {
 }
 
 void
-scrollup() {
+scrollup(char mat[][]) {
 	int i, j;
 	
 	for(i=0; i<(LINES_QTY -1) ;i++) {
-		strncpy(vcon.virtualVideo[i], vcon.virtualVideo[i+1], LINE_SIZE);
+		strncpy(mat[i], mat[i+1], LINE_SIZE);
 	}
 	for(j=0; j<(LINE_SIZE/2) ;j++) {
-		vcon.virtualVideo[i][j*2]= ' ';
+		mat[i][j*2]= ' ';
 	}
-	vcon.vcursor.line--;
-	rcursor.line= vcon.vcursor.line;
 }
 
 void
