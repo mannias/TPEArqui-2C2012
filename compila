@@ -8,6 +8,7 @@ gcc -c ../src/libc.c  -o libc.o -fno-builtin
 gcc -c ../src/drivers/keyboard.c -o keyboard.o -fno-builtin
 gcc -c ../src/shell.c -o shell.o -fno-builtin -fno-stack-protector
 gcc -c ../src/drivers/video.c -o video.o -fno-builtin
-gcc -c ../src/library/stdio.c -o stdio.o -fno-builtin
+gcc -c ../src/library/stdio.c -o stdio.o -fno-builtin -fno-stack-protector
 gcc -c ../src/library/stdlib.c -o stdlib.o -fno-builtin
-ld -T ../src/link.ld -o kernel.bin kernel.o kstart.o libc.o libasm.o keyboard.o shell.o video.o stdio.o stdlib.o
+gcc -c ../src/library/ctype.c -o ctype.o -fno-builtin
+ld -T ../src/link.ld -o kernel.bin kernel.o kstart.o libc.o libasm.o keyboard.o shell.o video.o stdio.o stdlib.o ctype.o
