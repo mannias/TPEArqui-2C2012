@@ -33,6 +33,6 @@ void realwrite();
 char read();
 void refreshScreen();
 void setUpVideo();
-void scrollup();
+void scrollup(char mat[][]);
 
 #endif
