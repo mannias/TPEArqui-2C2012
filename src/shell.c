@@ -7,8 +7,9 @@
 
 void startShell(){
 	int num;
-	printSegments();
-	malloc(120);
+	//printSegments();
+	printMemory();
+	//malloc(120);
 	//if(malloc(12) == NULL){
 	//	printf("lala");
 	//}

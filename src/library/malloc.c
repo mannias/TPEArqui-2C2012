@@ -4,21 +4,26 @@ char* toHex(char* hex, char* pointer);
 
 void initMalloc(){
 	mem_header node = (mem_header)FIRST_SEGMENT;
-	node->next = NULL;
+	node->next = node;
 	node->length = MEM_LENGTH;
 	node->used = FALSE;
+	int i;
+	char* point = FIRST_SEGMENT;
+	for(i=0; i< 2000; i++){
+		point[i] = 'a';
+	}
 }
 
 
 void* malloc(int length){
-	mem_header node;
+	mem_header node, firstnode;
 	char pointer[9];
-	node = (mem_header)FIRST_SEGMENT;
+	firstnode = node = (mem_header)FIRST_SEGMENT;
 	int found = 0;
-	while(node != NULL && !found){
+	do{
 		if(node->length >= length && node->used == FALSE){
-			mem_header nextnode = (mem_header)(node + sizeof(mem_segment) + length+1);
-			nextnode->next = NULL;
+			mem_header nextnode = (mem_header)(node + sizeof(mem_segment) + length);
+			nextnode->next = node->next;
 			nextnode->length = node->length - ( sizeof(mem_segment) + length);
 			nextnode->used = FALSE;
 			node->length = length;
@@ -34,7 +39,7 @@ void* malloc(int length){
 			printf("nodenext: %s\n",toHex(pointer,(char*)node->next));
 			node = node->next;
 		}
-	}
+	}while(node != firstnode && !found);
 	if(found){
 		return (void*) node+sizeof(mem_header);
 	}
@@ -53,18 +58,27 @@ void* free(char* dir){
 }
 
 void printSegments(){
-	mem_header node = (mem_header)FIRST_SEGMENT;
+	mem_header node, firstnode;
+	node = firstnode = (mem_header)FIRST_SEGMENT;
 	char pointer[9];
 	char* dir = FIRST_SEGMENT;
-	while(node != NULL){
+	do{
 		printf("%s - ",toHex(pointer,dir));
 		printf("%i - ", node->length);
 		printf("%s\n", node->used ? "Used":"Free" );
 
 		dir = (char*)node->next;
 		node = node->next;
-	}	
+	}while(node != firstnode);
 }	
+
+void printMemory(){
+	int i;
+	char* node = FIRST_SEGMENT;
+	for(i=0; i< 2000; i++){
+		putc(node+i);
+	}
+}
 
 char* toHex(char* hex, char* pointer){
 	int i;

@@ -25,7 +25,7 @@ typedef struct {
 	tCursor vcursor;
 	tCommandsBuffer commands_buffer;
 } tVirConsole;
-	
+
 
 void write(char c);
 void virtualwrite(char c);
@@ -33,6 +33,6 @@ void realwrite();
 char read();
 void refreshScreen();
 void setUpVideo();
-void scrollup(char mat[][]);
+void scrollup();
 
 #endif

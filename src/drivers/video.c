@@ -14,7 +14,7 @@ setUpVideo(){
 	rcursor.line= FIRST_LINE;
 	rcursor.character= FIRST_CHAR;
 	realVideo= (char *) 0xb8000;
-	
+
 	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
 		for(j=FIRST_LINE; j<LINES_QTY ;j++) {
 			vcon.virtualVideo[j][i*2]= ' ';
@@ -34,7 +34,7 @@ void
 realwrite() {
 	int rpos= (rcursor.line *LINE_SIZE) +rcursor.character;
 	int vpos= (vcon.vcursor.line *LINE_SIZE) +vcon.vcursor.character;
-	
+
 	if(rpos<vpos)
 		for(rpos; rpos< vpos ;rpos+=2)
 			realVideo[rpos]= vcon.virtualVideo[rpos/LINE_SIZE][rpos%LINE_SIZE];
@@ -56,12 +56,8 @@ virtualwrite (char c) {
 		case ENTER: 
 			if(vcon.vcursor.line == (LINES_QTY -1)) {
 				scrollup();
-				vcon.vcursor.line--;
-				rcursor.line= vcon.vcursor.line;
-				refreshScreen(vcon.virtualVideo);
+				refreshScreen();
 			}
-			strncpy(vcon.commands_buffer.buffer[vcon.commands_buffer.currentline], vcon.virtualVideo[vcon.vcursor.line], LINE_SIZE);
-			vcon.commands_buffer.currentline++;
 			vcon.vcursor.line++;
 			vcon.vcursor.character= FIRST_CHAR;
 			break;
@@ -98,15 +94,17 @@ virtualwrite (char c) {
 }
 
 void
-scrollup(char mat[][]) {
+scrollup() {
 	int i, j;
-	
+
 	for(i=0; i<(LINES_QTY -1) ;i++) {
-		strncpy(mat[i], mat[i+1], LINE_SIZE);
+		strncpy(vcon.virtualVideo[i], vcon.virtualVideo[i+1], LINE_SIZE);
 	}
 	for(j=0; j<(LINE_SIZE/2) ;j++) {
-		mat[i][j*2]= ' ';
+		vcon.virtualVideo[i][j*2]= ' ';
 	}
+	vcon.vcursor.line--;
+	rcursor.line= vcon.vcursor.line;
 }
 
 void
@@ -116,5 +114,4 @@ refreshScreen() {
 			realVideo[i]= vcon.virtualVideo[i/LINE_SIZE][i%LINE_SIZE];
 
 }
-
 
