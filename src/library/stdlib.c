@@ -40,13 +40,3 @@ strncmp(char str1[], char str2[], int n) {
 	return aux;
 	
 }
-
-int
-test() {
-
-	char str1[]= "asdfg";
-	char str2[]= "asdfg";
-	strcpy(str1, str2);
-	return strcmp(str1, str2);
-}
-
