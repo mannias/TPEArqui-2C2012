@@ -70,10 +70,6 @@ void* free(char* dir){
 	headnode->used = FALSE;
 
 	mergeContinuous();
-	// while(headnode->next != NULL && headnode->next->used == FALSE){
-	// 	headnode->length = headnode->length + headnode->next->length;
-	// 	headnode->next = headnode->next->next;
-	// }
 }
 
 void mergeContinuous(){

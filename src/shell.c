@@ -24,6 +24,7 @@ void startShell(){
 	for(i = 0; i<7; i++){
 		free(vec[i]);
 	}
+	malloc(1048576);
 	printSegments();
 	//printint(test());
 	scanf("%i", &num);
