@@ -4,7 +4,7 @@
 #include "../../include/defs.h"
 
 #define MEM_LENGTH 8388608
-#define FIRST_SEGMENT (char*) 0x000300
+#define FIRST_SEGMENT (char*) 0x200000
 
 typedef struct mem_segment{
 	struct mem_segment * next;

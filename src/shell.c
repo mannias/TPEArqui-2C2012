@@ -8,11 +8,12 @@
 void startShell(){
 	int num;
 	//printSegments();
-	printMemory();
-	//malloc(120);
-	//if(malloc(12) == NULL){
-	//	printf("lala");
-	//}
+	//printMemory();
+
+	if(malloc(1048576) == NULL){
+		printf("lala");
+	}
+	printSegments();
 	//printint(test());
 	scanf("%i", &num);
 	printf("%i\n", num);
