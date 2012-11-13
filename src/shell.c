@@ -6,14 +6,17 @@
 
 
 void startShell(){
-	char *str;
-	char brokestr[2][LINE_SIZE/2];
-	int ints[2];
-	int aux;
+	// char *str;
+	// char brokestr[2][LINE_SIZE/2];
+	// int ints[2];
+	// int aux;
 
-	getLine(str);
-	aux= parsestring(str, brokestr, ints);
-
+	// getLine(str);
+	// aux= parsestring(str, brokestr, ints);
+	int i;
+	addIDT(0x08);
+	scanf("%d",&i);
+	removeIDT(0x08);
 }
 
 int
