@@ -12,7 +12,6 @@ void initMalloc(){
 	long length = checkMem();
 	length *= 1048576;
 	minsegment = (int)((sizeof(mem_segment)*(length-(0.1*length))/(0.1*length)));
-	printf("TAMANIO: %i\n", minsegment);
 	length -= (int)(0.1*length)+1;
 	startsegment = BASE_SEGMENT + (int)(0.1*length)+1;
 	mem_header node = (mem_header)BASE_SEGMENT;

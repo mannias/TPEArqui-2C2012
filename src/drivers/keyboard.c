@@ -1,8 +1,8 @@
 #include "keyboard.h"
 
-char* english 		= "__1234567890-=__qwertyuiop[]__asdfghjkl;'`_\\zxcvbnm,./_*_______________789-456+1230._____";
-char* englishShift 	= "__!@#$%^&*()_+__QWERTYUIOP{}__ASDFGHJKL:_~_|ZXCVBNM<>?_*_______________789-456+1230._____";
-char* englishMayus 	= "__1234567890-=__QWERTYUIOP[]__ASDFGHJKL;'`_\\ZXCVBNM,./_*_______________789-456+1230._____";
+char* english 		= "__1234567890-=__qwertyuiop[]__asdfghjkl;'`_\\zxcvbnm,./_*______________________________";
+char* englishShift 	= "__!@#$%^&*()_+__QWERTYUIOP{}__ASDFGHJKL:_~_|ZXCVBNM<>?_*______________________________";
+char* englishMayus 	= "__1234567890-=__QWERTYUIOP[]__ASDFGHJKL;'`_\\ZXCVBNM,./_*______________________________";
 
 char keyboard_buffer[BUFFER_LEN];
 int loc;
@@ -11,6 +11,7 @@ int mayus;
 
 void 
 saveCharacter(unsigned char num){
+
 	char aux;
 	if(loc == BUFFER_LEN){
 		loc = -1;	// vuelve al inicio del BUFFER circular
@@ -24,7 +25,7 @@ saveCharacter(unsigned char num){
 	}else{
 		aux = englishShift[num];
 	}
-	if(aux == '_' && num !=12){
+	if((aux == '_' && num !=12) || num >= 129 ){
 		if(num == 0x2A || num == 0x36){
 			shiftFlag = 1;
 		}
@@ -43,6 +44,18 @@ saveCharacter(unsigned char num){
 		}
 		if(num ==0x0E){
 			keyboard_buffer[++loc] = BACKSPACE;
+		}
+		if(num == 0x48){
+			keyboard_buffer[++loc] = UP_ARROW;
+		}
+		if(num == 0x50){
+			keyboard_buffer[++loc] = DOWN_ARROW;
+		}
+		if(num == 0x4D){
+			keyboard_buffer[++loc] = RIGHT_ARROW;
+		}
+		if(num == 0x4B){
+			keyboard_buffer[++loc] = LEFT_ARROW;
 		}
 	}else if(num < 96){
 		keyboard_buffer[++loc] = aux;
