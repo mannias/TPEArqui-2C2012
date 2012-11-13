@@ -5,5 +5,8 @@
 
 void startShell();
 int parse(char *name, char *params);
+void clear();
+void about();
+void commands();
 
 #endif

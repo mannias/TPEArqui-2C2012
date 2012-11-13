@@ -6,6 +6,7 @@
 #define FIRST_LINE 0
 #define FIRST_CHAR 0
 #define LINES_QTY  25
+#define LINE_SIZE  160
 
 #define WHITE_TXT 0x07
 
@@ -35,5 +36,6 @@ void refreshScreen();
 void refreshLine(int n);
 void setUpVideo();
 void scrollup(char mat[LINES_QTY][LINE_SIZE]);
+void clearScreen();
 
 #endif

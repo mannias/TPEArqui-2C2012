@@ -6,37 +6,14 @@
 
 
 void startShell(){
-	
-	//checkIdt();
-	int num;
-	printf("\n");
-	//addIDT(0x08);
-	//checkIdt();
-	// char *strtoparse[2];
-	printSegments();
-	// //printMemory();
-	// int i = 0;
-	// //i = checkMem();
-	// //printf("%i\n", i);
-	// //printf("asdasd");
-	// char* vec[7];
-	// //printf("algo");
-	// for(i = 0; i<7; i++){
-	// 	if((vec[i] = malloc(1048576))==NULL){
-	// 		printf("NADA");
-	// 	}
-	// }
-	// printSegments();
-	// for(i = 6; i>=0; i--){
-	// 	free(vec[i]);
-	// }
-	// //malloc(1048576);
-	// printSegments();
-	// //printint(test());
-	scanf("%i", &num);
-	printf("%i\n", num);
-	//removeIDT(0x08);
-	//checkIdt();
+	char *str;
+	char brokestr[2][LINE_SIZE/2];
+	int ints[2];
+	int aux;
+
+	getLine(str);
+	aux= parsestring(str, brokestr, ints);
+
 }
 
 int
@@ -44,11 +21,11 @@ parse(char *name, char *params) {
 	int auxints[2]= {-1,-1};
 	
 	if(!strcmp(name, "clear") && !params)
-		/*clear()*/;
+		clear();
 	else if(!strcmp(name, "about") && !params)
-		/*about()*/;
+		about();
 	else if(!strcmp(name, "commands") && !params)
-		/*commands()*/;
+		commands();
 	else if(!strcmp(name, "infoIDT") && !params)
 		/*infoIDT()*/;
 	else if(!strcmp(name, "addIDT") && parseInts(params, auxints) && (auxints[0]>=0) && (auxints[0]<10))
@@ -57,3 +34,24 @@ parse(char *name, char *params) {
 		/*removeIDT(auxints[0])*/;
 	
 }
+
+void
+clear() {
+	clearScreen();
+}
+
+void
+about() {
+	printf(" Wimdows by Domingues Matias & Lori Tomas. ");
+}
+
+void
+commands() {
+	printf(" Available commands:\n");
+	printf("clear() - Clears the screen.\n");
+	printf("about() - Information about the O.S and authors.\n");
+	printf("infoIDT() - Shows the IDT vector and status of each.\n");
+	printf("addIDT(index, routine) - Allows to add a different routine for resolving interruptions.\n");
+	printf("removeIDT(index) - Allows to remove the routine called when dealing with a particular interruption.\n");
+}
+
