@@ -52,10 +52,10 @@ saveCharacter(unsigned char num){
 			keyboard_buffer[++loc] = DOWN_ARROW;
 		}
 		if(num == 0x4D){
-			keyboard_buffer[++loc] = RIGHT_ARROW;
+			keyboard_buffer[++loc] = FORW_ARROW;
 		}
 		if(num == 0x4B){
-			keyboard_buffer[++loc] = LEFT_ARROW;
+			keyboard_buffer[++loc] = BACK_ARROW;
 		}
 	}else if(num < 96){
 		keyboard_buffer[++loc] = aux;

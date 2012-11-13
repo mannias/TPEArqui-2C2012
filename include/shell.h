@@ -4,6 +4,6 @@
 #include "defs.h"
 
 void startShell();
-int parse(char *str, int *flag);
+int parse(char *name, char *params);
 
 #endif
