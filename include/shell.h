@@ -4,7 +4,7 @@
 #include "defs.h"
 
 void startShell();
-int parse(char *name, char *params);
+int parse(char *name, int params[]);
 void clear();
 void about();
 void commands();

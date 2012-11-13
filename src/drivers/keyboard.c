@@ -9,6 +9,11 @@ int loc;
 int shiftFlag;
 int mayus;
 
+/*
+	Funcion encargada de decodificar y guardar en el buffer el "scankey" pasado
+	Ademas lee distintos scankeys que corresponden a comportamientos tales como
+	Backspace o shift, que modifican el comportamiento interno
+*/
 void 
 saveCharacter(unsigned char num){
 
@@ -63,6 +68,9 @@ saveCharacter(unsigned char num){
 	return;
 }
 
+/*
+	Inicializador del teclado, inicia el buffer y flags
+*/
 void
 startKeyboard(){
 	int i;
@@ -74,6 +82,11 @@ startKeyboard(){
 	}
 }
 
+
+/*
+	Funcion que retorna el ultimo elemento que ingreso al buffer,
+	si llego al final vuelve al inicio y sino vuelve al final
+*/
 char getKeyboardChar(){
 	if(loc == -1){
 		if(keyboard_buffer[BUFFER_LEN-1] == '\0'){

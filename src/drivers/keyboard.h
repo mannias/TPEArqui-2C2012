@@ -9,6 +9,5 @@
 void saveCharacter(unsigned char num);
 void startKeyboard();
 char getKeyboardChar();
-void printBuffer();
 
 #endif
