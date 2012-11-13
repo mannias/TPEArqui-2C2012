@@ -36,5 +36,6 @@ void refreshScreen();
 void refreshLine(int n);
 void setUpVideo();
 void scrollup(char mat[LINES_QTY][LINE_SIZE]);
+void clearScreen();
 
 #endif

@@ -16,14 +16,7 @@ setUpVideo(){
 	rcursor.line= FIRST_LINE;
 	rcursor.character= FIRST_CHAR;
 	realVideo= (char *) 0xb8000;
-
-	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
-		for(j=FIRST_LINE; j<LINES_QTY ;j++) {
-			vcon.virtualVideo[j][i*2]= ' ';
-			vcon.virtualVideo[j][(i*2)+1]= WHITE_TXT;
-			vcon.commands_buffer.buffer[j][i*2]= ' ';
-			vcon.commands_buffer.buffer[j][(i*2)+1]= WHITE_TXT;
-		}
+	clearScreen();
 }
 
 void
@@ -147,7 +140,17 @@ void
 refreshLine(int n) {
 	int i;
 	for(i=FIRST_CHAR; i<LINE_SIZE ;i++)
-		realVideo[(n*LINE_SIZE)+i]= vcon.virtualVideo[n][i];
-		
+		realVideo[(n*LINE_SIZE)+i]= vcon.virtualVideo[n][i];		
 }
 
+void
+clearScreen();
+	int i, j;
+	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
+		for(j=FIRST_LINE; j<LINES_QTY ;j++) {
+			vcon.virtualVideo[j][i*2]= ' ';
+			vcon.virtualVideo[j][(i*2)+1]= WHITE_TXT;
+			vcon.commands_buffer.buffer[j][i*2]= ' ';
+			vcon.commands_buffer.buffer[j][(i*2)+1]= WHITE_TXT;
+		}
+}
