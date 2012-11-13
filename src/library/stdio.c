@@ -86,7 +86,7 @@ void putint(int data){
     if(data == 0){
         return;
     }
-    printint(data/10);
+    putint(data/10);
     putc(data%10 + '0');
 }
 
