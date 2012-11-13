@@ -7,10 +7,13 @@
 
 void startShell(){
 	
-	checkIdt();
+	//checkIdt();
 	int num;
+	printf("\n");
+	//addIDT(0x08);
+	//checkIdt();
 	// char *strtoparse[2];
-	// //printSegments();
+	printSegments();
 	// //printMemory();
 	// int i = 0;
 	// //i = checkMem();
@@ -32,6 +35,8 @@ void startShell(){
 	// //printint(test());
 	scanf("%i", &num);
 	printf("%i\n", num);
+	//removeIDT(0x08);
+	//checkIdt();
 }
 
 int

@@ -18,6 +18,7 @@ void		_Sti(void);	 /* Habilita interrupciones  */
 
 void		_int_08_hand();      /* Timer tick */
 void		_int_09_hand();
+void		_int_08_empty();
 
 void		_debug (void);
 
