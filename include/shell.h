@@ -8,5 +8,8 @@ int parse(char *name, int params[]);
 void clear();
 void about();
 void commands();
+void infoIDT();
+void testIDT();
+void testmalloc(int size);
 
 #endif

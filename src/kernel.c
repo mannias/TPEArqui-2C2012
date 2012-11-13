@@ -1,13 +1,11 @@
 #include "../include/kasm.h"
 #include "../include/defs.h"
 #include "drivers/keyboard.h"
-//#include "drivers/video.h"
+
+extern _empty_hand;
 
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
-
-void int_08() {
-}
 	
 /**********************************************
 kmain() 
@@ -22,10 +20,6 @@ kmain()
 /* Limpieza registros bios */
     i=1-1;
 
-/* Borra la pantalla. */ 
-
-	k_clear_screen();
-
 /* Carga el teclado */
 	startKeyboard();
 
@@ -36,7 +30,7 @@ kmain()
 	initMalloc();
 /* CARGA DE IDT CON LA RUTINA DE ATENCION DE IRQ0    */
 
-        setup_IDT_entry (&idt[0x08], 0x08, (dword)&_int_08_hand, ACS_INT, 0);
+        setup_IDT_entry (&idt[0x08], 0x08, (dword)&_empty_hand, ACS_INT, 0);
         setup_IDT_entry (&idt[0x09], 0x08, (dword)&_int_09_hand, ACS_INT, 0);
 	
 /* Carga de IDTR    */
@@ -60,11 +54,6 @@ kmain()
         	startShell();
         }
 	
-}
-
-void int_09(unsigned char scancode){
-	saveCharacter(scancode);
-	return;
 }
 
 
