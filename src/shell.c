@@ -13,7 +13,7 @@ void startShell(){
 
 	getLine(str);
 	aux= parsestring(str, brokestr, ints);
-	printf("valido? %d, ints= %d, %d\n", aux, ints[0], ints[1]);  
+	
 	
 }
 

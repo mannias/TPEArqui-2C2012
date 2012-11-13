@@ -122,11 +122,9 @@ strncmp(char str1[], char str2[], int n) {
 int 
 cutstring(char to[], char from[], char c) {
 	int i;
-	printf("cutstring con %s ", from);
 	for(i=0; (from[i] != c) && from[i] ;i++)
 		to[i]= from[i];
-	//printf("%d %d \n", i, from[i]);
-	to[i]= 0;
+	to[i]= '\0';
 	if(!from[i])
 		return -1;
 	return i+1;
@@ -135,18 +133,16 @@ cutstring(char to[], char from[], char c) {
 int
 checkclear(char str[]) {
 	int i;
-	if(str[0])
-		for(i=0; str[i] ;i++) 
-			if(str[i] != ' ')
-				return FALSE;
+	for(i=0; str[i] ;i++) 
+		if(str[i] != ' ')
+			return FALSE;
 	return TRUE;
 }
 
 int
 parsestring(char orig[], char ret[2][LINE_SIZE/2], int ints[2]) {
 	int aux, aux2;
-	aux= cutstring(ret[0], orig, '('); 
-	printf("%s\n", ret[0]);
+	aux= cutstring(ret[0], orig, '(');
 	if(aux == -1)
 		return FALSE;
 	aux2= cutstring(ret[1], &(orig[aux]), ')');
@@ -154,18 +150,15 @@ parsestring(char orig[], char ret[2][LINE_SIZE/2], int ints[2]) {
 		return FALSE;
 	if(!checkclear(&(orig[aux+aux2])))
 		return FALSE;
-		
 	return parseInts(ret[1], ints);
 }
 
 int
 parseInts(char *str, int ints[2]) {
 	int aux;
-	char *s1;
-	char *s2;
-	printf("parseInts con %s\n", str);
+	char s1[LINE_SIZE/2];
+	char s2[LINE_SIZE/2];
 	aux= cutstring(s1, str, ',');
-	printf("retorne");
 	if(!allnumbers(s1))
 		return FALSE;
 	if(aux != -1) {
@@ -181,7 +174,6 @@ parseInts(char *str, int ints[2]) {
 int
 allnumbers(char str[]) {
 	int i;
-	printf("allnumbers\n");
 	for(i=0; str[i] ;i++)
 		if((str[i] < '0') || (str[i] > '9'))
 			return FALSE;

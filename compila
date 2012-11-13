@@ -12,6 +12,6 @@ gcc -c ../src/library/stdio.c -o stdio.o -fno-builtin -fno-stack-protector
 gcc -c ../src/library/stdlib.c -o stdlib.o -fno-builtin
 gcc -c ../src/library/ctype.c -o ctype.o -fno-builtin
 gcc -c ../src/library/malloc.c -o malloc.o -fno-builtin -fno-stack-protector
-gcc -c ../src/library/string.c -o string.o -fno-builtin
+gcc -c ../src/library/string.c -o string.o -fno-builtin -fno-stack-protector
 gcc -c ../src/library/idt.c -o idt.o -fno-builtin -fno-stack-protector
 ld -T ../src/link.ld -o kernel.bin kernel.o kstart.o libc.o libasm.o keyboard.o shell.o video.o stdio.o stdlib.o ctype.o malloc.o string.o idt.o

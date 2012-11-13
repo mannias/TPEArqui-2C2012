@@ -211,11 +211,11 @@ getLine(char str[LINE_SIZE/2]) {
 			putc(str[i]);
 			if(str[i] == '\n') {
 				flag= TRUE;
-				str[i]= 0;
+				str[i]= '\0';
 			}
 		}
 		else
-			str[i]=0;
+			str[i]= '\0';
 	}
 }
 
