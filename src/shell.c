@@ -7,7 +7,7 @@
 
 void startShell(){
 	int num;
-	printSegments();
+	//printSegments();
 	//printMemory();
 	int i = 0;
 	//i = checkMem();
@@ -21,10 +21,10 @@ void startShell(){
 		}
 	}
 	printSegments();
-	for(i = 0; i<7; i++){
+	for(i = 6; i>=0; i--){
 		free(vec[i]);
 	}
-	malloc(1048576);
+	//malloc(1048576);
 	printSegments();
 	//printint(test());
 	scanf("%i", &num);

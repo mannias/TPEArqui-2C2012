@@ -3,14 +3,23 @@
 char* toHex(char* hex, char* pointer);
 void mergeNext(mem_header node);
 void mergeContinuous();
+mem_header getHeader(char* dir);
+
+int minsegment;
+char* startsegment;
 
 void initMalloc(){
 	long length = checkMem();
 	length *= 1048576;
-	mem_header node = (mem_header)FIRST_SEGMENT;
+	minsegment = (int)((sizeof(mem_segment)*(length-(0.1*length))/(0.1*length)));
+	printf("TAMANIO: %i\n", minsegment);
+	length -= (int)(0.1*length)+1;
+	startsegment = BASE_SEGMENT + (int)(0.1*length)+1;
+	mem_header node = (mem_header)BASE_SEGMENT;
 	node->next = NULL;
 	node->length = length;
 	node->used = FALSE;
+	node->loc = startsegment;
 }
 
 int checkMem(){
@@ -41,14 +50,18 @@ int checkMem(){
 void* malloc(int length){
 	mem_header node, firstnode;
 	char pointer[9];
-	firstnode = node = (mem_header)FIRST_SEGMENT;
+	firstnode = node = (mem_header)BASE_SEGMENT;
 	int found = 0;
+	if(length < minsegment){
+		length = minsegment;
+	}
 	do{
 		if(node->length + sizeof(mem_segment) >= length && node->used == FALSE){
-			mem_header nextnode = (mem_header)((char*)node + sizeof(mem_segment) + length);
+			mem_header nextnode = (mem_header)((char*)node + sizeof(mem_segment));
 			nextnode->next = node->next;
-			nextnode->length = node->length - ( sizeof(mem_segment) + length);
+			nextnode->length = node->length - length;
 			nextnode->used = FALSE;
+			nextnode->loc = node->loc + length;
 			node->length = length + sizeof(mem_segment);
 			node->next = nextnode;
 			node->used = TRUE;
@@ -58,22 +71,33 @@ void* malloc(int length){
 		}
 	}while(node != NULL && !found);
 	if(found){
-		return (void*) node + sizeof(mem_segment);
+		return node->loc;
 	}
 	return NULL;
 
 }
 
 void* free(char* dir){
-	char vec[9];
-	mem_header headnode = (mem_header) ((char*)dir - sizeof(mem_segment));
-	headnode->used = FALSE;
+	mem_header headnode = getHeader(dir);
+	if(headnode != NULL){
+		headnode->used = FALSE;
+		mergeContinuous();
+	}
+}
 
-	mergeContinuous();
+mem_header getHeader(char* dir){
+	mem_header node = (mem_header)BASE_SEGMENT;
+	while(node != NULL){
+		if(node->loc == dir){
+			return node;
+		}
+		node = node->next;
+	}
+	return NULL;
 }
 
 void mergeContinuous(){
-	mem_header node = (mem_header)FIRST_SEGMENT;
+	mem_header node = (mem_header)BASE_SEGMENT;
 	while(node != NULL){
 		if(node->used == FALSE){
 			mergeNext(node);
@@ -90,23 +114,19 @@ void mergeNext(mem_header node){
 }
 
 void printSegments(){
-	mem_header node, firstnode;
-	node = firstnode = (mem_header)FIRST_SEGMENT;
+	mem_header node = (mem_header)BASE_SEGMENT;
 	char pointer[9];
-	char* dir = FIRST_SEGMENT;
 	do{
-		printf("%s - ",toHex(pointer,dir));
+		printf("%s - ",toHex(pointer,node->loc));
 		printf("%i - ", node->length);
 		printf("%s\n", node->used ? "Used":"Free" );
-
-		dir = (char*)node->next;
 		node = node->next;
 	}while(node != NULL);
 }	
 
 void printMemory(){
 	int i;
-	char* node = FIRST_SEGMENT;
+	char* node = BASE_SEGMENT;
 	for(i=0; i< 2000; i++){
 		putc(node+i);
 	}

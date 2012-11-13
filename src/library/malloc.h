@@ -3,10 +3,11 @@
 
 #include "../../include/defs.h"
 
-#define FIRST_SEGMENT (char*) 0x200000
+#define BASE_SEGMENT (char*) 0x200000
 
 typedef struct mem_segment{
 	struct mem_segment * next;
+	char* loc;
 	long length;
 	int used;
 }mem_segment;
