@@ -27,7 +27,7 @@ setUpVideo(){
 }
 
 void
-write (char c) {
+write(char c) {
 
 	virtualwrite(c);
 	realwrite();
@@ -43,7 +43,7 @@ realwrite() {
 		for(rpos; rpos< vpos ;rpos+=2)
 			realVideo[rpos]= vcon.virtualVideo[rpos/LINE_SIZE][rpos%LINE_SIZE];
 	else
-		for(rpos; vpos< rpos ;rpos-=2)
+		for(rpos; vpos<= rpos ;rpos-=2)
 			realVideo[rpos]= vcon.virtualVideo[rpos/LINE_SIZE][rpos%LINE_SIZE];
 
 	rcursor.line= vcon.vcursor.line;
@@ -84,6 +84,7 @@ virtualwrite (char c) {
 			if(vcon.vcursor.character > FIRST_CHAR) {
 				vcon.vcursor.character-= 2;
 				write(' ');
+				vcon.vcursor.character-= 2;
 			}
 			break;
 

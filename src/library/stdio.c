@@ -86,7 +86,7 @@ void putint(int data){
     if(data == 0){
         return;
     }
-    putint(data/10);
+    printint(data/10);
     putc(data%10 + '0');
 }
 
@@ -94,9 +94,6 @@ void printint(int data){
     if(data < 0){
         putc('-');
         data *= (-1);
-    }
-    if(data == 0){
-        putc('0');
     }
     putint(data);
 
@@ -203,6 +200,23 @@ char* getUpstream(char *vec){
 
 void cleanBuffer(){
     while(getc()!= '\n');
+}
+
+void
+getLine(char str[LINE_SIZE/2]) {
+	int i, flag= FALSE;
+	for(i=0; i<(LINE_SIZE/2) ;i++) {
+		if(!flag) {
+			str[i]= getc();
+			putc(str[i]);
+			if(str[i] == '\n') {
+				flag= TRUE;
+				str[i]= 0;
+			}
+		}
+		else
+			str[i]=0;
+	}
 }
 
 void wait(){

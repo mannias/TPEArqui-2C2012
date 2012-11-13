@@ -1,4 +1,15 @@
 #include "string.h"
+#include "../../include/defs.h"
+
+
+/* regresa la longitud de cs */
+int strlen(char* cs){
+	int i = 0;
+	while(cs[i] != '\0'){
+		i++;
+	}
+	return i-1;
+}
 
 /* apuntador a la primera ocurrencia de c en cs*/
 char* strchr(char* cs, char* c){
@@ -68,15 +79,6 @@ char* strnchr(char* cs, char* c, int num){
 	return NULL;
 }
 
-/* regresa la longitud de cs */
-int strlen(char* cs){
-	int i = 0;
-	while(cs[i] != '\0'){
-		i++;
-	}
-	return i-1;
-}
-
 void 
 strcpy(char to[], char from[]) {
 	int i;
@@ -117,52 +119,71 @@ strncmp(char str1[], char str2[], int n) {
 	return aux;
 } 
 
+int 
+cutstring(char to[], char from[], char c) {
+	int i;
+	printf("cutstring con %s ", from);
+	for(i=0; (from[i] != c) && from[i] ;i++)
+		to[i]= from[i];
+	//printf("%d %d \n", i, from[i]);
+	to[i]= 0;
+	if(!from[i])
+		return -1;
+	return i+1;
+}	
+
 int
-parsestring(char *orig, char *ret[2]) {
-	int i, current=0, length=0;
-	for(i=0; i<(LINE_SIZE/2) ;i++) {
-		if(((orig[i*2] == '(') && (current == 0)) || ((orig[i*2] == ')') && (current == 1))) {
-			length++;
-			current++;
-		}
-		else if(current > 1 && orig[i*2] != ' ')
-			return FALSE;
-		else if(current == 0) {
-			length++;
-			ret[current][i]= orig[i*2];
-		}
-		else if(current == 1)
-			ret[current][i-length]= orig[i*2];
-		else
-			return FALSE;
-	}
-	if(current != 2)
-		return FALSE;
-	ret[0][length-1]= 0;
-	ret[1][i-length]= 0;
+checkclear(char str[]) {
+	int i;
+	if(str[0])
+		for(i=0; str[i] ;i++) 
+			if(str[i] != ' ')
+				return FALSE;
 	return TRUE;
 }
 
 int
+parsestring(char orig[], char ret[2][LINE_SIZE/2], int ints[2]) {
+	int aux, aux2;
+	aux= cutstring(ret[0], orig, '('); 
+	printf("%s\n", ret[0]);
+	if(aux == -1)
+		return FALSE;
+	aux2= cutstring(ret[1], &(orig[aux]), ')');
+	if(aux2 == -1)
+		return FALSE;
+	if(!checkclear(&(orig[aux+aux2])))
+		return FALSE;
+		
+	return parseInts(ret[1], ints);
+}
+
+int
 parseInts(char *str, int ints[2]) {
-	int i, current=0, length=0;
-	char *aux;
-	for(i=0; str[i] ;i++) {
-		if((str[i] == ',') && (current == 0)) {
-			length++;
-			ints[current]= atoi(aux); 
-			current++;
-		}
-		else if(current == 0 && isNumber(str[i]) ) {
-			length++;
-			aux[i]= str[i];
-		}
-		else if(current == 1 && isNumber(str[i]) )
-			aux[i-length]= str[i];
-		else
+	int aux;
+	char *s1;
+	char *s2;
+	printf("parseInts con %s\n", str);
+	aux= cutstring(s1, str, ',');
+	printf("retorne");
+	if(!allnumbers(s1))
+		return FALSE;
+	if(aux != -1) {
+		cutstring(s2, &(str[aux]), '\0');
+		if(!allnumbers(s2))
 			return FALSE;
+		ints[1]= atoi(s2);
 	}
-	
-	ints[current]= atoi(aux);
+	ints[0]= atoi(s1);
+	return TRUE;
+}
+
+int
+allnumbers(char str[]) {
+	int i;
+	printf("allnumbers\n");
+	for(i=0; str[i] ;i++)
+		if((str[i] < '0') || (str[i] > '9'))
+			return FALSE;
 	return TRUE;
 }

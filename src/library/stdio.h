@@ -16,5 +16,6 @@ void printf(const char *data, ...);
 void putc(char data);
 char getc();
 void scanf(const char *data, ...);
+void getLine(char str[LINE_SIZE/2]);
 
 #endif

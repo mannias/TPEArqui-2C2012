@@ -31,10 +31,10 @@
 #define DOWN_ARROW		25
 #define FORW_ARROW		26
 #define BACK_ARROW		27
-#define LINE_SIZE  160
 
 #define TRUE 1
 #define FALSE 0
+#define LINE_SIZE  160
 
 #define NULL  0
 
