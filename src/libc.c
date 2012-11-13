@@ -60,11 +60,12 @@ removeIDT(unsigned char num){
 }
 
 char 
-read () {
+read(int descriptor) {
 	
 	char aux;
-	while((aux = getKeyboardChar()) == NULL)
-		;
+	if(descriptor == 0)
+		while((aux = getKeyboardChar()) == NULL)
+			;
+	
 	return aux;
-
 }
