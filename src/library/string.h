@@ -5,6 +5,7 @@
 #define FALSE 0
 #define NULL 0
 #define LINE_SIZE 160
+#define LINES_QTY 25
 
 #define isNumber(x) (x<='9' && x>='0')? 1:0
 #define isChar(x)	((x<='Z' && x>='A') || (x<='z' && x>='a'))? 1:0

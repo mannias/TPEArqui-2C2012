@@ -6,6 +6,8 @@
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
 
+void int_08() {
+}
 	
 /**********************************************
 kmain() 
@@ -32,8 +34,10 @@ kmain()
 
 /* Inicia el malloc */
 	initMalloc();
-/* CARGA DE IDT CON LA RUTINA DE ATENCION DE IRQ1    */
-    setup_IDT_entry (&idt[0x09], 0x08, (dword)&_int_09_hand, ACS_INT, 0);
+/* CARGA DE IDT CON LA RUTINA DE ATENCION DE IRQ0    */
+
+        setup_IDT_entry (&idt[0x08], 0x08, (dword)&_int_08_hand, ACS_INT, 0);
+        setup_IDT_entry (&idt[0x09], 0x08, (dword)&_int_09_hand, ACS_INT, 0);
 	
 /* Carga de IDTR    */
 
@@ -47,7 +51,7 @@ kmain()
 	
 /* Habilito interrupcion de timer tick*/
 
-        _mascaraPIC1(0xFD);
+        _mascaraPIC1(0xFC);
         _mascaraPIC2(0xFF);
         
 	_Sti();
@@ -56,6 +60,11 @@ kmain()
         	startShell();
         }
 	
+}
+
+void int_09(unsigned char scancode){
+	saveCharacter(scancode);
+	return;
 }
 
 

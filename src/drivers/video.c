@@ -144,7 +144,7 @@ refreshLine(int n) {
 }
 
 void
-clearScreen(){
+clearScreen() {
 	int i, j;
 	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
 		for(j=FIRST_LINE; j<LINES_QTY ;j++) {
@@ -153,4 +153,9 @@ clearScreen(){
 			vcon.commands_buffer.buffer[j][i*2]= ' ';
 			vcon.commands_buffer.buffer[j][(i*2)+1]= WHITE_TXT;
 		}
+	refreshScreen();
+	vcon.vcursor.line= FIRST_LINE;
+	vcon.vcursor.character= FIRST_CHAR;
+	rcursor.line= FIRST_LINE;
+	rcursor.character= FIRST_CHAR;
 }
