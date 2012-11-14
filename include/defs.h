@@ -68,8 +68,5 @@ typedef struct {
 } IDTR;
 
 
-int tick_is_at_line_start();
-int tick_is_at_line_end();
-
 #endif
 

@@ -1,7 +1,7 @@
 GLOBAL  _read_msw,_lidt
 GLOBAL  _int_08_hand
 GLOBAL  _int_09_hand
-GLOBAL _int_08_empty
+GLOBAL _empty_hand
 
 GLOBAL  _mascaraPIC1,_mascaraPIC2,_Cli,_Sti
 GLOBAL  _debug
@@ -53,8 +53,6 @@ _lidt:				; Carga el IDTR
         pop     ebp
         retn
 
-_int_08_empty:
-        iret
 
 _int_08_hand:				; Handler de INT 8 ( Timer tick)
         push    ds
@@ -79,6 +77,11 @@ _int_09_hand:
         call int_09
         pop eax
         jmp EOI
+
+_empty_hand:
+		cli
+		pusha
+		jmp EOI
 
 
 EOI:

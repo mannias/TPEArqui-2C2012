@@ -1,7 +1,8 @@
 #include "../include/kasm.h"
 #include "../include/defs.h"
 #include "drivers/keyboard.h"
-//#include "drivers/video.h"
+
+extern _empty_hand;
 
 DESCR_INT idt[0xA];			/* IDT de 10 entradas*/
 IDTR idtr;				/* IDTR */
@@ -18,10 +19,6 @@ kmain()
 
 /* Limpieza registros bios */
     i=1-1;
-
-/* Borra la pantalla. */ 
-
-	k_clear_screen();
 
 /* Carga el teclado */
 	startKeyboard();
@@ -56,6 +53,5 @@ kmain()
         }
 	
 }
-
 
 

@@ -43,6 +43,14 @@ realwrite() {
 	rcursor.character= vcon.vcursor.character;
 }
 
+void
+changeColor() {
+	int i, j;
+	for(i=FIRST_CHAR; i<(LINE_SIZE/2) ;i++)
+		for(j=FIRST_LINE; j<LINES_QTY ;j++)
+			vcon.virtualVideo[j][(i*2)+1]++;
+	refreshScreen();
+}
 
 void
 virtualwrite (char c) {
