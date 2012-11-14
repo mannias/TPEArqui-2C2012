@@ -13,5 +13,7 @@ void testIDT();
 void testmalloc();
 void mymalloc(int num);
 void printMem();
+void myfree(int num);
+void getMem();
 
 #endif

@@ -16,7 +16,8 @@ typedef mem_segment * mem_header;
 
 void initMalloc();
 void* malloc(int length);
-void* free(char* dir);
+int free(char* dir);
 void printSegments();
+int getFreeMem();
 
 #endif

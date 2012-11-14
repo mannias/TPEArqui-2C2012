@@ -81,12 +81,14 @@ void* malloc(int length){
 
 }
 
-void* free(char* dir){
+int free(char* dir){
 	mem_header headnode = getHeader(dir);
 	if(headnode != NULL){
 		headnode->used = FALSE;
 		mergeContinuous();
+		return 1;
 	}
+	return 0;
 }
 
 mem_header getHeader(char* dir){
@@ -119,9 +121,11 @@ void mergeNext(mem_header node){
 
 void printSegments(){
 	mem_header node = (mem_header)BASE_SEGMENT;
-	char pointer[9];
+	char pointer[17];
+	printf("HEXA          - INT     - LENGTH  - STATE\n");
 	do{
 		printf("%s - ",toHex(pointer,node->loc));
+		printf("%d - ", (int)node->loc);
 		printf("%i - ", node->length);
 		printf("%s\n", node->used ? "Used":"Free" );
 		node = node->next;
@@ -136,13 +140,25 @@ void printMemory(){
 	}
 }
 
+int getFreeMem(){
+	int sum = 0;
+	mem_header node = (mem_header)BASE_SEGMENT;
+	while(node != NULL){
+		if(node->used == FALSE){
+			sum += node->length;
+		}
+		node = node->next;
+	}
+	return sum;
+}
+
 char* toHex(char* hex, char* pointer){
 	int i;
 	int w;
 	int num = (int)pointer;
 	hex[0] = '0';
 	hex[1] = 'x';
-	for(i=7; i>1; i--){
+	for(i=12; i>1; i--){
 		w=num%16;
 		if(w<10){
 			hex[i] = w+'0';
@@ -151,6 +167,6 @@ char* toHex(char* hex, char* pointer){
 		}
 		num/=16;
 	}
-	hex[8] = '\0';
+	hex[13] = '\0';
 	return hex;
 }

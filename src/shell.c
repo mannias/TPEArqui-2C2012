@@ -78,6 +78,14 @@ parse(char *name, int params[2]) {
 		printMem();
 		return TRUE;
 	}
+	else if(!strcmp(name, "free") && (params[0] != -1) && (params[1] == -1)) {
+		myfree(params[0]);
+		return TRUE;
+	}
+	else if(!strcmp(name, "getfreemem") && (params[0] == -1) && (params[1] == -1)) {
+		getMem();
+		return TRUE;
+	}
 	return FALSE;
 }
 
@@ -103,6 +111,8 @@ commands() {
 	printf("testmalloc() - Generates random segments to test the malloc function\n");
 	printf("mymalloc(num) - Calls malloc\n");
 	printf("printmemory() - Prints the actual memory mapping\n");
+	printf("getfreemem() - Prints the ammount of free memory\n");
+	printf("free(num) - Free the segment by num\n");
 }
 
 void
@@ -144,16 +154,37 @@ testmalloc() {
 
 void
 mymalloc(int num){
-	if(malloc(num) != NULL){
-		printf("%d - reserved\n", num);
+	char vec[17];
+	char* dir;
+	if((dir = malloc(num)) != NULL){
+		printf("%d - reserved\n", (int)dir);
 	}else{
-		printf("Out of Memory");
+		printf("Out of Memory\n");
 	}
 }
+
+
 
 void
 printMem(){
 	printSegments();
+}
+
+void
+myfree(int num){
+	char* mem = (char*)0x000000;
+	mem += num;
+	if(free(mem)){
+		printf("Liberado con exito\n");
+	}else{
+		printf("Sector incorrecto\n");
+	}
+};
+
+void
+getMem(){
+	int num = getFreeMem();
+	printf("Memoria libre: %d\n", num);
 }
 
 void
