@@ -10,6 +10,8 @@ void about();
 void commands();
 void infoIDT();
 void testIDT();
-void testmalloc(int size);
+void testmalloc();
+void mymalloc(int num);
+void printMem();
 
 #endif

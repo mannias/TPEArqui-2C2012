@@ -7,6 +7,7 @@ mem_header getHeader(char* dir);
 
 int minsegment;
 char* startsegment;
+char* lastsegment;
 
 void initMalloc(){
 	long length = checkMem();
@@ -19,6 +20,7 @@ void initMalloc(){
 	node->length = length;
 	node->used = FALSE;
 	node->loc = startsegment;
+	lastsegment = BASE_SEGMENT + length;
 }
 
 int checkMem(){
@@ -55,14 +57,17 @@ void* malloc(int length){
 		length = minsegment;
 	}
 	do{
-		if(node->length + sizeof(mem_segment) >= length && node->used == FALSE){
-			mem_header nextnode = (mem_header)((char*)node + sizeof(mem_segment));
-			nextnode->next = node->next;
-			nextnode->length = node->length - length;
-			nextnode->used = FALSE;
-			nextnode->loc = node->loc + length;
-			node->length = length + sizeof(mem_segment);
-			node->next = nextnode;
+		if(node->length >= length && node->used == FALSE){
+			if(node->length > length){
+				mem_header nextnode = (mem_header)lastsegment;
+				lastsegment += sizeof(mem_segment);
+				nextnode->next = node->next;
+				nextnode->length = node->length - length;
+				nextnode->used = FALSE;
+				nextnode->loc = node->loc + length;
+				node->next = nextnode;
+				node->length = length;
+			}
 			node->used = TRUE;
 			found = 1;
 		}else{
@@ -87,7 +92,7 @@ void* free(char* dir){
 mem_header getHeader(char* dir){
 	mem_header node = (mem_header)BASE_SEGMENT;
 	while(node != NULL){
-		if(node->loc == dir){
+		if(node->loc == dir ){
 			return node;
 		}
 		node = node->next;

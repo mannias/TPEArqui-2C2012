@@ -30,12 +30,13 @@ checkIDT(){
 	char vec[9];
 	int i;
 	DESCR_INT *data;
+	printf("ID - SELECTOR - OFFSET LOW - OFFSET HIGH - ACCESS - CERO\n");
 	for(i=0; i<10; i++){
 		data = &idt[i];
 		printf("%d - ", i);
-		if((data->offset_l == ((dword) &_empty_hand & 0xFFFF)) && (data->offset_h == ((dword) &_empty_hand >> 16)))
+		if(((data->offset_l == ((dword) &_empty_hand & 0xFFFF)) && (data->offset_h == ((dword) &_empty_hand >> 16)))||data->selector == 0){
 			printf("%s\n", "EMPTY");
-		else{
+		}else{
 			printf("%d - ", data->selector);
 			printf("%s - ", toHex(vec,data->offset_l));
 			printf("%s - ", toHex(vec,data->offset_h));
@@ -49,15 +50,28 @@ void
 addIDT(unsigned char num, dword rout){
 	setup_IDT_entry (&(idt[num]), 0x08, rout, ACS_INT, 0);
 	_Cli();
-	//_mascaraPIC1(0xFC);
+	_mascaraPIC1(0xFC);
 	_Sti();
 }
 
 void 
 removeIDT(unsigned char num){
-	setup_IDT_entry (&(idt[num]), 0x08, (dword)&_empty_hand, ACS_INT, 0);
-	_Cli();
-	_Sti();
+	if(num == 8){
+		setup_IDT_entry (&(idt[num]), 0x00, (dword)&_empty_hand, ACS_INT, 0);
+		_Cli();
+		_mascaraPIC1(0xFD);
+		_Sti();
+	}
+	if(num == 9){
+		setup_IDT_entry (&(idt[num]), 0x00, (dword)&_empty_hand, ACS_INT, 0);
+		_Cli();
+		if((&idt[0x08])->selector != 0){
+			_mascaraPIC1(0xFE);
+		}else{
+			_mascaraPIC1(0xFF);
+		}
+		_Sti();
+	}
 }
 
 char 

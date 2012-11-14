@@ -28,6 +28,7 @@ void startShell(){
 	while(1) {
 		ints[0]=-1;
 		ints[1]=-1;
+		putc('>');
 		getLine(str);
 		if(!(aux[0]=parsestring(str, brokestr, ints)) || !(aux[1]=parse(brokestr[0], ints)))
 			printf("Wrong command, call commands() to see a list of valid commands.\n");
@@ -65,8 +66,16 @@ parse(char *name, int params[2]) {
 		testIDT();
 		return TRUE;
 	}
-	else if(!strcmp(name, "testmalloc") && (params[0] != -1) && (params[1] == -1) ) {
-		testmalloc(params[0]);
+	else if(!strcmp(name, "mymalloc") && (params[0] != -1) && (params[1] == -1) ) {
+		mymalloc(params[0]);
+		return TRUE;
+	}
+	else if(!strcmp(name, "testmalloc") && (params[0] == -1) && (params[1] == -1)) {
+		testmalloc();
+		return TRUE;
+	}
+	else if(!strcmp(name, "printmemory") && (params[0] == -1) && (params[1] == -1)) {
+		printMem();
 		return TRUE;
 	}
 	return FALSE;
@@ -79,7 +88,7 @@ clear() {
 
 void
 about() {
-	printf("Wimdows by Dominguez Matias & Lori Tomas.\n");
+	printf("Wimdows by Domingues Matias & Lori Tomas.\n");
 }
 
 void
@@ -90,6 +99,10 @@ commands() {
 	printf("infoIDT() - Shows the IDT vector and status of each.\n");
 	printf("addIDT(index, routine) - Allows to add a different routine for \n solving interruptions.\n");
 	printf("removeIDT(index) - Allows to remove the routine called when dealing \n with a particular interruption.\n");
+	printf("testIDT() - Shows how addIDT(), addIDT() and removeIDT() works\n");
+	printf("testmalloc() - Generates random segments to test the malloc function\n");
+	printf("mymalloc(num) - Calls malloc\n");
+	printf("printmemory() - Prints the actual memory mapping\n");
 }
 
 void
@@ -98,8 +111,49 @@ infoIDT() {
 }
 
 void
-testmalloc(int size) {
+testmalloc() {
+	char* vec[5];
+	int i;
+	printSegments();
+	printf("\n");
+	for(i=4; i>=0; i--){
+		vec[i] = malloc(1048576);
+	}
+	printSegments();
+	getc();
+	printf("\n");
+	for(i=4; i>=0; i--){
+		if(vec[i] != NULL){
+			free(vec[i]);
+		}
+	}
+	printSegments();
+	getc();
+	for(i=0; i<5; i++){
+		vec[i] = malloc(1048576);
+	}
+	if(vec[3] != NULL){
+		free(vec[3]);
+	}
+	for(i=0; i<5 ; i++){
+		malloc(1024);
+	}
+	printSegments();
 
+}
+
+void
+mymalloc(int num){
+	if(malloc(num) != NULL){
+		printf("%d - reserved\n", num);
+	}else{
+		printf("Out of Memory");
+	}
+}
+
+void
+printMem(){
+	printSegments();
 }
 
 void

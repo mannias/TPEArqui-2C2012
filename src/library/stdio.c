@@ -95,6 +95,9 @@ void printint(int data){
         putc('-');
         data *= (-1);
     }
+    if(data == 0){
+        putc('0');
+    }
     putint(data);
 
 }
