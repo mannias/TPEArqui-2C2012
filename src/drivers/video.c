@@ -15,20 +15,22 @@ setUpVideo(){
 	vcon.commands_buffer.index= 0;
 	rcursor.line= FIRST_LINE;
 	rcursor.character= FIRST_CHAR;
-	realVideo= (char *) 0xb8000;
 	clearScreen();
 }
 
 void
-write(char c) {
+write(char c, int descriptor) {
 
 	virtualwrite(c);
-	realwrite();
+	realwrite(descriptor);
 
 }
 
 void 
-realwrite() {
+realwrite(int descriptor) {
+	if(descriptor == 1)
+		realVideo = (char *) 0xb8000;
+
 	int rpos= (rcursor.line *LINE_SIZE) +rcursor.character;
 	int vpos= (vcon.vcursor.line *LINE_SIZE) +vcon.vcursor.character;
 
@@ -84,7 +86,7 @@ virtualwrite (char c) {
 		case BACKSPACE: 
 			if(vcon.vcursor.character > FIRST_CHAR) {
 				vcon.vcursor.character-= 2;
-				write(' ');
+				write(' ', 1);
 				vcon.vcursor.character-= 2;
 			}
 			break;

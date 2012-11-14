@@ -100,14 +100,11 @@ void printint(int data){
 }
 
 void putc(char data){
-    write(data);
+    write(data, 1);
 }
 
-char *video= (char *) 0xb8000;
-int pos = 0;
-
 char getc(){
-    read();
+    read(0);
 }
 
 void scanf(const char *data, ...){

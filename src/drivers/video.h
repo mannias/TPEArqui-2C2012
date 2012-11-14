@@ -28,10 +28,10 @@ typedef struct {
 } tVirConsole;
 
 
-void write(char c);
+void write(char c, int descr);
 void virtualwrite(char c);
-void realwrite();
-char read();
+void realwrite(int descr);
+char read(int descr);
 void refreshScreen();
 void refreshLine(int n);
 void setUpVideo();
